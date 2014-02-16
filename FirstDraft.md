@@ -102,3 +102,5 @@ Okay, so you've got the recipes for some basic shapes down.  Before we start put
 
 #### 1.1b Drawing to the screen! The fun bits. ####
 
+You surivived the boring bits!
+
