@@ -170,18 +170,46 @@ Randomness makes your openFrameworks sketches dark, mysterious and unpredictable
         ofSetColor(ofRandom(50, 255));
 ```
 
+**[Note: Aside on what computer randomness is?]**
+
+**[Note: Point to c++ section on float vs int and casting?]**
+
 Remember that we are using grayscale colors and that they take on values between 0 and 255.  We can exlude some of the deep black colors because they won't be visible to us when drawing on a black background.  
 
-**[Note: change image to cursive 'hi']**
+**[Note: change image to cursive 'hi'?]**
 
 ![Rectangle Snake](images/intrographics_rectanglesnake.png "Drawing a snake of rectangles")
 
-So whenever you are done drawing weird rectangle snakes, we can move on to adding repetition.
+**[Note: reference to c++ loops section?]**
+
+So whenever you are done drawing weird rectangle snakes, we can move on to adding repetition.  Instead of drawing a single rectangle every frame during which the left mouse button is pressed, we can draw a burst of randomized rectangles.  To create that burst, we are going use a for loop to generate a set some number of rectangles where each rectangle's grayscale color, width, height and offset from mouse position will be randomly chosen from a range of values.  Modify your `draw` function to look like this:  
+
+```c++
+    if (isLeftMousePressed) {
+        ofSetRectMode(OF_RECTMODE_CENTER);
+        int numRects = 10;
+        for (int r=0; r<numRects; r++) {
+            ofSetColor(ofRandom(50, 255));
+            float width = ofRandom(5, 20);
+            float height = ofRandom(5, 20);
+            float xoffset = ofRandom(-40, 40);
+            float yoffset = ofRandom(-40, 40);
+            ofRect(mouseX+xoffset, mouseY+yoffset, width, height);
+        }
+    }
+```
+
+But let's add one more thing before you hit run.  Into `setup`, add:
+
+```c++
+    ofSetFrameRate(60);
+```
+
+**[Note: do I need to explain framerate?]**
+
+If you don't set
 
 
-
-**[Note: Aside on what computer randomness is?]**
-**[Note: Point to c++ section on float vs int and casting?]**
 
 Introduce ofVec2f
 
