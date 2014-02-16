@@ -118,6 +118,71 @@ Let's create a new openFrameworks project and call it something like ShapeBrush.
 
 `ofSetBackgroundAuto` takes a boolean value, so pass in `false` and then we draw a black background.  **[Note: point to c++ chapter's description of bools?]**   Great!  We've created an exceptionally empty space that we can overload with shapes.
 
+Since we will be doing all our drawing inside of the `draw` function, what we need to create some variables that let us know 1) where the mouse is located on the screen and 2) whether or not the left mouse button is currently pressed.
+
+For 1), we can use two built-in openFrameworks variables `mouseX` and `mouseY`.  These variables are updated internally by openFrameworks. We can use them inside our `draw` function as we would any other integer variables.
+
+For 2), we should take a look at two functions inside your openFrameworks source file (.cpp) that you probably haven't had a need to use yet: [`mousePressed(int x, int y, int button)`](http://www.openframeworks.cc/documentation/application/ofBaseApp.html#show_mousePressed "mousePressed Documentation Page") and [`mouseReleased(int x, int y, int button)`](http://www.openframeworks.cc/documentation/application/ofBaseApp.html#show_mouseReleased) "mouseReleased Documentation Page").  These functions are called by openFrameworks anytime a mouse button is pressed or released.  It recieves the x and y position of the mouse when the mouse was pressed/released as well as an integer representing which mouse button was pressed/released.   We can thus set up a boolean variable, isLeftMousePressed, and change its value inside of these two functions.
+
+So add this to your header file (.h):
+
+```c++
+		bool isLeftMousePressed;
+```
+
+And add this into the `setup` function of your source file (.cpp):
+
+```c++
+    isLeftMousePressed = false;  
+```
+
+Now that the boolean variable is set up, add these lines to your `mousePressed` and `mouseReleased` functions:
+
+```c++
+void testApp::mousePressed(int x, int y, int button){
+    if (button == OF_MOUSE_BUTTON_LEFT) isLeftMousePressed = true;
+}
+
+void testApp::mouseReleased(int x, int y, int button){
+    if (button == OF_MOUSE_BUTTON_LEFT) isLeftMousePressed = false;
+}
+```
+
+Whenever a button on the mouse is pressed or released, we want to check if that button is the left mouse button.  If it is, then we can adjust our `isLefMousePressed` boolean appropriately.  The `button` variable is an integer that identifies which button is pressed/released, and openFrameworks provides some handy constants that we can use to identify the button in a human-readable way (`OF_MOUSE_BUTTON_LEFT`, `OF_MOUSE_BUTTON_MIDDLE` and `OF_MOUSE_BUTTON_RIGHT`).  If you really wanted, you *could* just say `button == 0` to test for whether the pressed/released button is the left mouse button.
+
+Let's hop into the `draw` function and start making use of our mouse information:
+
+```c++
+    if (isLeftMousePressed) {
+        ofSetColor(255);
+        ofSetRectMode(OF_RECTMODE_CENTER);
+        ofRect(mouseX, mouseY, 50, 50);
+    }
+```
+
+[`ofSetRectMode`](http://www.openframeworks.cc/documentation/graphics/ofGraphics.html#show_ofSetRectMode "ofSetRectMode Documentation Page") allows us to control how the x and y positions we pass into `ofRect` are used to draw a rectangle.  Like with the mouse button constants, openFrameworks provides some rectangle mode constants for us to use: `OF_RECTMODE_CORNER` and `OF_RECTMODE_CENTER`.  By default rectangles are drawn by interpreting the x and y values you pass to it as the coordinates of the upper left corner (`OF_RECTMODE_CORNER`).  For our purposes, it is more convient for us to specify the center of the rectangle (`OF_RECTMODE_CENTER`) so that our rectangle is centered over the mouse position.  So we draw the center of our white, 50 x 50 rectangle at the mouse position using `mouseX` and `mouseY`.
+
+Boring! We are going to make this a bit more interesting by 1) adding randomness and 2) adding repeptition.
+
+Randomness makes your openFrameworks sketches dark, mysterious and unpredictable.  So meet one of your new friends, [`ofRandom`](http://openframeworks.cc/documentation/math/ofMath.html#!show_ofRandom "ofRandom Documentation Page").  `ofRandom` can be used in two different ways: by passing in two values `ofRandom(float min, float max)` or by passing in a single value `ofRandom(float max)`.  If you pass in two values, they are the minimum and maximum values you want your random value to take.  If you pass in a single value, it is considered to be the maximum value you want and the minimum is assumed to be 0.  So when we go to specify the color of the rectangle we are about to draw, we can substitute a random value:
+
+```c++
+        ofSetColor(ofRandom(50, 255));
+```
+
+Remember that we are using grayscale colors and that they take on values between 0 and 255.  We can exlude some of the deep black colors because they won't be visible to us when drawing on a black background.  
+
+**[Note: change image to cursive 'hi']**
+
+![Rectangle Snake](images/intrographics_rectanglesnake.png "Drawing a snake of rectangles")
+
+So whenever you are done drawing weird rectangle snakes, we can move on to adding repetition.
+
+
+
+**[Note: Aside on what computer randomness is?]**
+**[Note: Point to c++ section on float vs int and casting?]**
+
 Introduce ofVec2f
 
 
