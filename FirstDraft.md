@@ -2,7 +2,7 @@
 
 Introduction TDB
 
-## Drawing Basic Shapes, and Then Drawing Many, Many Basic Shapes ##
+## 1. Drawing Basic Shapes, and Then Drawing Many, Many Basic Shapes ##
 
 **[Insert Section on Setup/Update/Draw]**
 
@@ -14,7 +14,9 @@ We will get coding as soon as possible and survive this chapter together.
 
 To get started creating brushes, we need to find the basic building blocks of graphics.  You can classify the 2D graphics functions that openFrameworks provides into two categories: predefined shapes and freeform shapes.  The predefines shapes are rectangles, circles, triangles and straight lines.  The freeform shapes are polygons and paths.
 
-### Predefined Shapes ###
+### 1.1 Predefined Shapes ###
+
+#### 1.1a Drawing to the screen! ####
 
 Okay, okay.  Time for actual code.  Add the following line to your `draw()` function and like magic you will have an empty, empty, black void of a window on your screen.
 
@@ -88,7 +90,7 @@ And if you want to control the thickness of the outlines (or the straight lines 
     // Code omitted for clarity ...
 ```
 
-Okay, so you've got the recipes for some basic shapes down.  Before we start putting those snippets of code to some creative uses, there's one more line of code that you should add, [`ofEnableAntiAliasing`](http://openframeworks.cc/documentation/graphics/ofGraphics.html#show_ofEnableAntiAliasing "ofEnableAntiAliasing Documentation Page").  You might have noticed that your outlines (and ofLines) look a bit blocky.  The lines look like paths of jagged pixels.  We can smooth out these pixels using an anti-aliasing technique.  Luckily, you don't have to do anything other than add `ofEnableAntiAliasing();` to your `setup` function, and poof, smoother lines.  (If you want to understand what's happening under the hood, check out the wiki on [anti-aliasing](http://en.wikipedia.org/wiki/Spatial_anti-aliasing "Wiki on spatial anti-aliasing")
+Okay, so you've got the recipes for some basic shapes down.  Before we start putting those snippets of code to some creative uses, there's one more line of code that you should add, [`ofEnableAntiAliasing`](http://openframeworks.cc/documentation/graphics/ofGraphics.html#show_ofEnableAntiAliasing "ofEnableAntiAliasing Documentation Page").  You might have noticed that your outlines (and ofLines) look a bit blocky.  The lines look like paths of jagged pixels.  We can smooth out these pixels using an anti-aliasing technique.  Luckily, you don't have to do anything other than add `ofEnableAntiAliasing();` to your `setup` function, and poof, smoother lines.  (If you want to understand what's happening under the hood, check out the wiki on [anti-aliasing](http://en.wikipedia.org/wiki/Spatial_anti-aliasing "Wiki on spatial anti-aliasing").
 
 **[Note: zoom in before/after image to show difference]**
 
@@ -96,4 +98,8 @@ Okay, so you've got the recipes for some basic shapes down.  Before we start put
 
 **[Note: Include something about rounded rect]**
 **[Note: Include something about setting rect mode, layering graphics, circle resolution]**
- 
+**[Note: Include something about RGB colors]**
+
+
+#### 1.1b Drawing to the screen! The fun bits. ####
+
