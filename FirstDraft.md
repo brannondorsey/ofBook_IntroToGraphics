@@ -4,18 +4,14 @@ Introduction TDB
 
 ## Drawing Basic Shapes, and Then Drawing Many, Many Basic Shapes ##
 
-First up, let’s get into the basic graphic loop that your openFrameworks app will live inside.  When you create a new project, you will see three functions like this in your .cpp source file:
+**[Insert Section on Setup/Update/Draw]**
 
-```C++
-void testApp::setup() {
+You might be wondering why we would start with making digital brushes?   
 
-}
+We will get coding as soon as possible and survive this chapter together.
 
-void testApp::update() {
+To get started creating brushes, we need to find the basic building blocks of graphics.  You can classify the 2D graphics functions that openFrameworks provides into two categories: predefined shapes and freeform shapes.  The predefines shapes are rectangles, circles, triangles and straight lines.  The freeform shapes are polygons and paths.
 
-}
+### Predefined Shapes ###
 
-void testApp::draw() {
-
-}
-```
+![Basic Shapes](images/intrographics_basicshapes.png "Basic Shapes With and Without Fill")
