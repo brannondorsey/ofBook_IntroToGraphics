@@ -182,7 +182,7 @@ Remember that we are using grayscale colors and that they take on values between
 
 **[Note: reference to c++ loops section?]**
 
-So whenever you are done drawing weird rectangle snakes, we can move on to adding repetition.  Instead of drawing a single rectangle every frame during which the left mouse button is pressed, we can draw a burst of randomized rectangles.  To create that burst, we are going use a for loop to generate a set some number of rectangles where each rectangle's grayscale color, width, height and offset from mouse position will be randomly chosen from a range of values.  Modify your `draw` function to look like this:  
+So whenever you are done drawing weird rectangle snakes, we can move on to adding repetition.  Instead of drawing a single rectangle every frame during which the left mouse button is pressed, we can draw a burst of randomized rectangles.  To create that burst, we are going use a for loop to generate a set some number of rectangles where each rectangle's parameters are randomly chosen from a set of values.  So what can we randomize?  Grayscale color, width and height are easy candidates.  We can also use a small positive or negative value to randomly offset each rectangle from mouse position.  Modify your `draw` function to look like this:  
 
 ```c++
     if (isLeftMousePressed) {
@@ -207,8 +207,34 @@ But let's add one more thing before you hit run.  Into `setup`, add:
 
 **[Note: do I need to explain framerate?]**
 
-If you don't set
+Why do we care about setting the framerate here?  We want to be able to accurately know (and control) how many rectangles our code will draw.  We are drawing 10 every time the `draw` function is called, but without setting the framerate, we don't know ahout many times the `draw` function will be called per second.  By setting the framerate to 60 frames per second, then we can say that our code will generate `10 rectangles per frame * 60 frames per second = 60 rectangles per second`.
 
+So what happens when you try using your new rectangle brush?  You get a box-shaped, messy spread of random rectangles.  Things are slowly becoming more interesting.  But you might have been expecting to see a circular spread?  Since we said that `xoffset` and `yoffset` could be random values between -40 and 40, we were actually picking values from a rectangular region of space.  You can imagine the boundries of that region by thinking about what happens when `xoffset` and `yoffset` take on their extreme values (e.g. [`xoffset`, `yoffset`] values of [-40, -40], [40, -40], [40, 40], [-40, 40]).
+
+To generate a circular spread, we need to introduce a tiny pinch of mathematics.  If we want to pick a random point that lives within a circle that has a particular size, it helps to think in terms of angles.  Image you are at the center of a circle.  If you rotate a random amount (let's call this the *polar angle*) and then move a random distance (let's call this the *polar radius*), you will end up in a random location within the circle (assuming you don't walk so far that you cross the boundry of your circle).  You've defined a point in space by a polar angle and a polar radius instead of using an x coordinate and a y coordinate.  What you've done is think in terms of what are called [polar coordinates](http://en.wikipedia.org/wiki/Polar_coordinate_system "Polar Coordinates Wiki").  (In contrast, using x and y values to define a point is the [Cartesian coordinate system](http://en.wikipedia.org/wiki/Cartesian_coordinate_system "Cartesian coordinate system"].)
+
+**[Note: This could use a simple visual to show cartesian vs polar coords]**
+
+So where does this leave us in terms of our code?  If we start at the mouse position, we want to pick a random direction (polar angle) and random distance (polar distance).  Once we have those, we can convert them back to Cartesian coordinates (x and y values) to be used for our `xoffset` and `yoffset`.  So modify your for loop inside your `draw` function to look like this:
+
+**[Note: Explain the trig conversion from polar to cartesian, or point to the math chapter section?]**
+
+```c++
+	for (int r=0; r<numRects; r++) {
+            ofSetColor(ofRandom(50, 255));
+            float width = ofRandom(5, 20);
+            float height = ofRandom(5, 20);
+            float angle = ofRandom(2.0*PI);
+            float distance = ofRandom(35);
+            float xoffset = cos(angle) * distance;
+            float yoffset = sin(angle) * distance;
+            ofRect(mouseX+xoffset, mouseY+yoffset, width, height);
+        }
+```
+
+**[Note: if there is room, add in a gaussian distribution via box-muller transform]**
+
+![Cartesian Versus Polar Spreads](images/intrographics_cartesianvspolarspread.png "Cartesian brush spread versus polar brush spread")
 
 
 Introduce ofVec2f
