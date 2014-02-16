@@ -109,6 +109,17 @@ Well, the necessary bits.  Why draw a single rectangle, when you can draw a bagi
 
 ![Many Rectangles](images/intrographics_lotsofrectangles.png "Drawing lots and lots of rectangles")
 
-So what do we need to do to create a digital version of a paint brush without needing much other than our basic recipes for shapes?  We need a canvas that doesn't constantly erase itself. [`ofSetBackgroundAuto`](http://openframeworks.cc/documentation/graphics/ofGraphics.html#show_ofSetBackgroundAuto "ofSetBackgroundAuto Documentation Page") allows us to stop openFrameworks from clearing the screen on each update.
+Let's create a new openFrameworks project and call it something like ShapeBrush.  We are going to just use the basic recipes from the last section and mix in some randomness and repetition to create a digital 'brush.'  When we click somewhere on the screen, we will draw a ton of shapes.  But we need a canvas that doesn't constantly erase itself. openFrameworks clears the screen on with each invocation of `draw`, so enter [`ofSetBackgroundAuto`](http://openframeworks.cc/documentation/graphics/ofGraphics.html#show_ofSetBackgroundAuto "ofSetBackgroundAuto Documentation Page"), which allows us to stop openFrameworks from clearing the screen on each update.  Add the following lines into your `setup` function:
 
+```c++
+    ofSetBackgroundAuto(false);
+    ofBackground(0); // If you omit this, the screen will be a default gray color
+```
+
+`ofSetBackgroundAuto` takes a boolean value, so pass in `false` and then we draw a black background.  **[Note: point to c++ chapter's description of bools?]**   Great!  We've created an exceptionally empty space that we can overload with shapes.
+
+Introduce ofVec2f
+
+
+GO BACK AND INTEGRATE GOOGLE DOC INFO INTO HERE
 
