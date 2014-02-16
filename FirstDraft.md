@@ -1,6 +1,6 @@
 # Graphics #
 
-Introduction TDB
+**Introduction TDB**
 
 ## 1. Drawing Basic Shapes, and Then Drawing Many, Many Basic Shapes ##
 
