@@ -69,7 +69,7 @@ But what if you only wanted to draw the outline of the shapes?  There are two fu
     ofLine(700, 250, 700, 350);
 ```
 
-Here, we've redraw our same shapes but without the fill and shifted down 200 pixels on the screen.  Much like `ofSetColor`, `ofFill` tells openFrameworks that it should be ready to draw filled shapes until it sees `ofNoFill`. (And `ofNoFill` says to draw outlines until the next `ofFill`.
+Here, we've redraw our same shapes but without the fill and shifted down 200 pixels on the screen.  Much like `ofSetColor`, `ofFill` tells openFrameworks that it should be ready to draw filled shapes until it sees `ofNoFill`. (And `ofNoFill` says to draw outlines until the next `ofFill`.)
 
 **[Note: mention why ofLine is lighter than full white]** 
 
@@ -103,4 +103,6 @@ Okay, so you've got the recipes for some basic shapes down.  Before we start put
 #### 1.1b Drawing to the screen! The fun bits. ####
 
 You surivived the boring bits!
+
+Well, the necessary bits.  Why draw a single rectangle, when you can draw a bagillion?
 
