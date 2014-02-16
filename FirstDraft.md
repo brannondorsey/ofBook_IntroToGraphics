@@ -4,9 +4,9 @@
 
 ## 1. Drawing Basic Shapes, and Then Drawing Many, Many Basic Shapes ##
 
-**[Insert Section on Setup/Update/Draw]**
+**[Note: Insert Section on Setup/Update/Draw]**
 
-**[Insert Section on XY coordinate system]**
+**[Note: Insert Section on XY coordinate system]**
 
 You might be wondering why we would start with making digital brushes?   
 
@@ -105,4 +105,6 @@ Okay, so you've got the recipes for some basic shapes down.  Before we start put
 You surivived the boring bits!
 
 Well, the necessary bits.  Why draw a single rectangle, when you can draw a bagillion?
+
+![Many Rectangles](images/intrographics_lotsofrectangles.png "Drawing lots and lots of rectangles")
 
