@@ -96,7 +96,8 @@ Okay, so you've got the recipes for some basic shapes down.  Before we start put
 ![Basic Shapes](images/intrographics_basicshapes.png "Basic shapes with and without a fill")
 
 **[Note: Include something about rounded rect]**
-**[Note: Include something about setting rect mode, layering graphics, circle resolution]**
+**[Note: Include something about layering, explaining screen buffer]**
+**[Note: Include something about setting rect mode, circle resolution]**
 **[Note: Include something about RGB colors]**
 
 
@@ -107,4 +108,7 @@ You surivived the boring bits!
 Well, the necessary bits.  Why draw a single rectangle, when you can draw a bagillion?
 
 ![Many Rectangles](images/intrographics_lotsofrectangles.png "Drawing lots and lots of rectangles")
+
+So what do we need to do to create a digital version of a paint brush without needing much other than our basic recipes for shapes?  We need a canvas that doesn't constantly erase itself. [`ofSetBackgroundAuto`](http://openframeworks.cc/documentation/graphics/ofGraphics.html#show_ofSetBackgroundAuto "ofSetBackgroundAuto Documentation Page") allows us to stop openFrameworks from clearing the screen on each update.
+
 
