@@ -69,6 +69,29 @@ But what if you only wanted to draw the outline of the shapes?  There are two fu
 
 Here, we've redraw our same shapes but without the fill and shifted down 200 pixels on the screen.  Much like `ofSetColor`, `ofFill` tells openFrameworks that it should be ready to draw filled shapes until it sees `ofNoFill`. (And `ofNoFill` says to draw outlines until the next `ofFill`.
 
+**[Note: mention why ofLine is lighter than full white]** 
+
+And if you want to control the thickness of the outlines (or the straight lines drawn with `ofLine`), you can use [`ofSetLineWidth`](http://openframeworks.cc/documentation/graphics/ofGraphics.html#show_ofSetLineWidth "ofSetLineWidth Documentation Page").  Again, like `ofSetColor`, `ofSetLineWidth` will effect all lines drawn until the thickness is changed again. Add the following lines to your `draw` function:
+
+```.cpp
+
+    // Code omitted for clarity ...
+    
+    ofFill(); // If you omit this and leave ofNoFill(), all the shapes will be outlines!
+    ofSetLineWidth(1);
+    
+    // Code omitted for clarity ...
+    
+    ofNoFill(); // If you omit this and leave ofFill(), all the shapes will be filled!
+    ofSetLineWidth(2);
+    
+    // Code omitted for clarity ...
+```
+
+But if you look closely at our outlines or lines, 
+
 
 ![Basic Shapes](images/intrographics_basicshapes.png "Basic Shapes With and Without Fill")
+
+**[Note: Include something about rounded rect]**
  
