@@ -32,8 +32,8 @@ Now that we have our background in place, we can start drawing on top of it.  Le
     ofEllipse(400, 100, 80, 100);
     ofTriangle(500, 150, 550, 50, 600, 150);
     for (int i=0; i<11; i++) {
-		    ofLine(650, 50+(i*10), 750, 75+(i*5));
-		}
+    	ofLine(650, 50+(i*10), 750, 75+(i*5));
+    }
 ```
 
 The first line of code tells openFrameworks what color it should be using when drawing.  You can think of it as telling openFrameworks to pull out a particular colored sharpie - it will draw in that color until you tell it to switch to another color.  Then we make use of some handy functions to draw shapes: `ofRect`, `ofCircle`, `ofEllipse`, `ofTriangle` and `ofLine`.  
