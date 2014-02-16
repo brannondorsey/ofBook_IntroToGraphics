@@ -88,8 +88,9 @@ And if you want to control the thickness of the outlines (or the straight lines 
     // Code omitted for clarity ...
 ```
 
-Okay, so you've got the recipe for 
+Okay, so you've got the recipes for some basic shapes down.  Before we start putting those snippets of code to some creative uses, there's one more line of code that you should add, [`ofEnableAntiAliasing`](http://openframeworks.cc/documentation/graphics/ofGraphics.html#show_ofEnableAntiAliasing "ofEnableAntiAliasing Documentation Page").  You might have noticed that your outlines (and ofLines) look a bit blocky.  The lines look like paths of jagged pixels.  We can smooth out these pixels using an anti-aliasing technique.  Luckily, you don't have to do anything other than add `ofEnableAntiAliasing();` to your `setup` function, and poof, smoother lines.  (If you want to understand what's happening under the hood, check out the wiki on [anti-aliasing](http://en.wikipedia.org/wiki/Spatial_anti-aliasing "Wiki on spatial anti-aliasing")
 
+**[Note: zoom in before/after image to show difference]**
 
 ![Basic Shapes](images/intrographics_basicshapes.png "Basic Shapes With and Without Fill")
 
