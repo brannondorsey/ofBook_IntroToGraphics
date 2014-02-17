@@ -323,10 +323,35 @@ In c++, you can compare an integer like `key` with a character through an inequa
 
 Whew! Now when you run your code, you should be able to clear your screen and switch between brushes.  Now let's fill in those circle, line and triangle brushes!
 
-With our circle brush, let's play with transparency and then add in some color.  Unlike what we did with rectangles, we are going to layer our circles on top of each other until they become hazy and indistinct.
+With our circle brush, let's play with transparency and then add in some color.  Unlike what we did with rectangles, we are going to layer our circles on top of each other until they become hazy and indistinct.  We are going to draw a giant transparent circle, then draw a slightly smaller transparent circle, then repeat, repeat, repeat.
 
-So far, we've only used opaque grayscale colors, but you can make your colors transparent by adding an extra parameter to `ofSetColor`
+Transparency? So far, we've only used opaque grayscale colors, but you can make your colors transparent by adding an extra parameter to `ofSetColor`, like `ofSetColor(255, 50)`.  That second parameter that we passed in is the alpha channel.  It takes a value from 0 to 255 where 0 is completely transparent and 255 is completely opaque.  But before we use colors that have alpha, we need to enable something called alpha blending.  This just means that when two transparent colors occupy the same space on the screen, their colors get mixed.  Alpha blending is disabled by default because it requires additional computational power over drawing opaque colors.  In the `setup` function, add the following line:
 
+```c++
+    ofEnableAlphaBlending();
+```
+
+Now we can start working on our `draw` function.  We will use the `angle`, `distance`, `xoffset` and `yoffset` code like we did with the rectangle brush.  The difference is that our loop will control the radius of our circle.  We will start with drawing a large radius circle and slowly reduce our radius to 0.  So add the following to `draw`:
+
+```c++
+			int maxRadius = 100;
+            int stepSize = 5;
+            for (int radius=maxRadius; radius>0; radius-=stepSize) {
+            for (int radius=100; radius>0; radius-=5) {
+                float angle = ofRandom(2.0*PI);
+                float distance = ofRandom(100);
+                float xoffset = cos(angle) * distance;
+                float yoffset = sin(angle) * distance;
+                ofSetColor(255, 3);
+                ofCircle(mouseX+xoffset, mouseY+yoffset, radius);
+            }
+```
+
+You can play with the maxRadius, stepSize and the random function for distance to get different effects. 
+
+
+
+**[Note: if there is time, extension with using an exponential decay for circle radius]**
 
 ### 1.2 Freeform Shapes ###
 
