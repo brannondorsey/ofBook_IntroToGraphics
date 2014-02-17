@@ -2,7 +2,7 @@
 
 **Introduction TDB**
 
-## 1. Drawing Basic Shapes, and Then Drawing Many, Many Basic Shapes ##
+## 1. Drawing Shapes.  Then Drawing Many, Many, Many Shapes ##
 
 **[Note: Insert Section on Setup/Update/Draw]**
 
@@ -236,8 +236,93 @@ So where does this leave us in terms of our code?  If we start at the mouse posi
 
 ![Cartesian Versus Polar Spreads](images/intrographics_cartesianvspolarspread.png "Cartesian brush spread versus polar brush spread")
 
+**[Note: Insert an image using the rectangle brush]**
 
-Introduce ofVec2f
+:) You are a rectangle master now.  But the circles, ellipses, lines and triangles probably feel neglected.  Since we are going to create a few more brushes, let's add two things to our code 1) the ability to erase the screen and 2) the ability to switch between brushes.
+
+For erasing the screen, add the following lines (check the comments to see where to put them):
+
+```c++
+		// Add to your header (.h):
+		bool isRightMousePressed;
+		
+	// Add to setup()
+    isRightMousePressed = false;
+		
+	// Add to mousePressed()
+    if (button == OF_MOUSE_BUTTON_RIGHT) isRightMousePressed = true; 
+    
+	// Add to mouseReleased()
+    if (button == OF_MOUSE_BUTTON_RIGHT) isRightMousePressed = false;
+    
+    // Add to the beginning of draw()
+    if (isRightMousePressed) ofBackground(0);
+```
+
+Now we can right click to get a fresh screen.  For adding the ability to switch between brushes, we are going to define an integer `drawingMode` and each number from 0 through 3 will represent a unique mode.  To make our code more human-readable, we will define an integer variable for each of those modes, e.g. `rectangleMode = 0`, etc.  Inside of `draw`, we can then check the drawingMode variable to determine what code to execute.  Then finally, we will use keyboard inputs to switch between the different brush modes.
+
+Add these variables to your header file (.h):
+
+```c++
+		int drawingMode;
+        int rectangleMode = 0;
+        int ellipseMode = 1;
+        int circleMode = 2;
+        int lineMode = 3;
+        int triangleMode = 4;
+```
+
+In your `.cpp` function, initialize your drawing mode to the rectangle brush:
+
+```c++
+    drawingMode = rectangleMode;
+```
+
+We are going to reorganize the `draw` function, so that it looks like this:
+
+```c++
+    // If right mouse button pressed, erase the screen
+    if (isRightMousePressed) ofBackground(0);
+    
+    // If left mouse button pressed, draw the appropriate brush
+    if (isLeftMousePressed) {
+        
+        if (drawingMode == rectangleMode) {
+            // Insert the rectangle drawing code you wrote here
+        }
+        
+        else if (drawingMode == circleMode) {
+        }
+        
+        else if (drawingMode == lineMode) {
+        }
+        
+        else if (drawingMode == triangleMode) {
+        }
+    }
+```
+
+And for getting keyboard inputs, we are going to make use of the [`keyPressed(int key)`](http://openframeworks.cc/documentation/application/ofBaseApp.html#!show_keyPressed keyPressed "Documentation Page") function that is already built into your openFrameworks code.  Like `mousePressed`, this function is called any time a key press is registered.  We just need to use that integer that is passed in to keyPressed to switch our `drawingMode`.  "r" for rectangle mode, "c" for circle mode, etc.
+
+**[Note: Talk about ASCII vs int representations of characters]**
+
+**[Note: the constants that oF provides for key presses]**
+
+```c++
+    if (key == 'r') drawingMode = rectangleMode;
+    else if (key == 'c') drawingMode = circleMode;
+    else if (key == 'l') drawingMode = lineMode;
+    else if (key == 't') drawingMode = triangleMode;
+```
+
+
+
+### 1.2 Freeform Shapes ###
+
+#### 1.2a Drawing to the screen! ####
+
+#### 1.2b Drawing to the screen! The fun bits. ####
+
 
 
 GO BACK AND INTEGRATE GOOGLE DOC INFO INTO HERE
