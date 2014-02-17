@@ -350,7 +350,9 @@ Now we can start working on our `draw` function.  We will use the `angle`, `dist
 
 The result is something like drawing with glowing light.  You can play with the maxRadius, radiusStepSize, alpha and maxOffsetDistance to get make that glowing effect stronger, weaker, narrower or wider.
 
-Well, you are probably tired of living in moody shades of gray.  
+![Circle Glow Brush](images/intrographics_circleglow.png "Results of using the circle glow brush")
+
+Kind of cool right? you are probably tired of having to live in moody shades of gray for so long.
 
 
 
