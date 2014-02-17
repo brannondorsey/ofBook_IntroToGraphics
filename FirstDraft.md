@@ -409,9 +409,51 @@ Just remember that if you change the line width here, you will need to go to you
 
 ![Line Star Brush](images/intrographics_linestars.png "Results of using the line brush")
 
-Whew, time for the last brush from predefined shapes - the triangle!  And with this, we will talk about two new concepts: `ofVec2f` and `ofNoise`.
+Whew, time for the last brush from predefined shapes - the triangle!  The general idea for this brush is to draw a bunch of randomized triangles that appear to be directed out from the mouse position.  Like this:
 
-First up is [`ofVec2f`](http://openframeworks.cc/documentation/math/ofVec2f.html "ofVec2f Documentation Page").  We've been defining a point in space by keeping two separate variables - one for the x position and one for the y position.  A triangle is defined by three points, so we would end up with six separate variables if we continued with our current tactic. FIt is annoying to have to 
+![Triangle Brush Sample](images/intrographics_trianglebrushsample.png "Sample how the triangle brush will look")
+
+But to be able to get to that, we will need to introduce two new concepts: `ofVec2f` and `ofNoise`.
+
+First up is [`ofVec2f`](http://openframeworks.cc/documentation/math/ofVec2f.html "ofVec2f Documentation Page").  We've been defining a point in space by keeping two separate variables - one for the x position and one for the y position.  A triangle is defined by three points, so we would end up with six separate variables if we continued with our current tactic.  `ofVec2f` allows us to hold both the x and y coordinates in one variable (and comes with some handy math operations).  You can use an ofVec2f variable like this:
+
+	ofVec2f mousePos(mouseX, mouseY);
+	
+	// Access the x and y coordinates like this: 
+	cout << "Mouse X: " << mousePos.x << endl;
+	cout << "Mouse Y: " << mousePos.y << endl;
+	
+	// Or you can modify the coordinates like this:
+	float xoffset = 10.0;
+	float yoffset = 30.0;
+	mousePos.x += xoffset;
+	mousePos.y += yoffset;
+	
+	// But you can do what we just did above by adding or subtracting two vectors directly
+	ofVec2f offset(10.0, 30.0);
+	mousePos += offset;
+
+ofVec2f isn't that scary, right?  And it is quite useful.  So let's start using it to build towards the triangle brush.  First step is to draw a triangle at the mouse cursor.  Specifically, we are going to draw an isoceles triangle:
+
+![Iscoceles Triangle](http://mathworld.wolfram.com/images/eps-gif/IsoscelesTriangle_800.gif "Image of an iscoceles triangle from wolfram")
+
+**[Note: Stolen graphics from wolfram, generate something similar later]**
+
+An isoceles triangle is one that has two sides that are of equal length (labeled as b) and one side of a different length (labeled a).  You can also see that the height (labeled h) is drawn in the figure.  We are going to use draw the triangle using one side (a) and the height (h).
+
+	ofVec2f mousePos(mouseX, mouseY);
+	float triangleHeight = 100;
+	float triangleSide = triangleHeight/2.0;
+	ofVec2f p1(0, triangleSide/2.0);
+	ofVec2f p2(triangleHeight, 0);
+	ofVec3f p3(0, -triangleSide/2.0);
+	p1 += mousePos;
+	p2 += mousePos;
+	p3 += mousePos;
+	ofSetColor(255, 50);
+	ofTriangle(p1, p2, p3);
+	
+
 
 
 
