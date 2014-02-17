@@ -553,6 +553,8 @@ But now you are a master of rectangles, circles, ellipses, lines and triangles, 
 
 **Need a section on saving your final image**
 
+**Need to include links to works by artists using these approaches**
+
 ### 1.2 Freeform Shapes ###
 
 #### 1.2a Drawing to the screen, again! ####
