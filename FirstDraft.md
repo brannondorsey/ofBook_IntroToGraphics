@@ -334,20 +334,23 @@ Transparency? So far, we've only used opaque grayscale colors, but you can make 
 Now we can start working on our `draw` function.  We will use the `angle`, `distance`, `xoffset` and `yoffset` code like we did with the rectangle brush.  The difference is that our loop will control the radius of our circle.  We will start with drawing a large radius circle and slowly reduce our radius to 0.  So add the following to `draw`:
 
 ```c++
-			int maxRadius = 100;
-            int stepSize = 5;
-            for (int radius=maxRadius; radius>0; radius-=stepSize) {
-            for (int radius=100; radius>0; radius-=5) {
+            int maxRadius = 100;
+            int radiusStepSize = 5;
+            int alpha = 3;
+            int maxOffsetDistance = 100;
+            for (int radius=maxRadius; radius>0; radius-=radiusStepSize) {
                 float angle = ofRandom(2.0*PI);
-                float distance = ofRandom(100);
+                float distance = ofRandom(maxOffsetDistance);
                 float xoffset = cos(angle) * distance;
                 float yoffset = sin(angle) * distance;
-                ofSetColor(255, 3);
+                ofSetColor(255, alpha);
                 ofCircle(mouseX+xoffset, mouseY+yoffset, radius);
             }
 ```
 
-You can play with the maxRadius, stepSize and the random function for distance to get different effects. 
+The result is something like drawing with glowing light.  You can play with the maxRadius, radiusStepSize, alpha and maxOffsetDistance to get make that glowing effect stronger, weaker, narrower or wider.
+
+Well, you are probably tired of living in moody shades of gray.  
 
 
 
