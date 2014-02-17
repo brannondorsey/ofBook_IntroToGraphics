@@ -232,6 +232,8 @@ So where does this leave us in terms of our code?  If we start at the mouse posi
         }
 ```
 
+**[Note: explain radians vs degrees]**
+
 **[Note: if there is room, add in a gaussian distribution via box-muller transform]**
 
 ![Cartesian Versus Polar Spreads](images/intrographics_cartesianvspolarspread.png "Cartesian brush spread versus polar brush spread")
@@ -304,9 +306,7 @@ We are going to reorganize the `draw` function, so that it looks like this:
 
 And for getting keyboard inputs, we are going to make use of the [`keyPressed(int key)`](http://openframeworks.cc/documentation/application/ofBaseApp.html#!show_keyPressed keyPressed "Documentation Page") function that is already built into your openFrameworks code.  Like `mousePressed`, this function is called any time a key is pressed.  We just need to use that integer that is passed in to keyPressed to switch our `drawingMode`.  "r" for rectangle mode, "c" for circle mode, etc.  
 
-But how exactly does an integer tell us which key has been pressed?  Well that integer is actually the ASCII code for the key that was pressed.  You can check out the [ASCII wiki](http://en.wikipedia.org/wiki/ASCII "ASCII Wiki Page") for details, but for this chapter, it is enough to just know that ASCII is an agreed upon system for assigning numbers to characters.  And it turns out to be quite easy to check if that ASCII integer `key` is a particular character.  `key == 'r''
-
-So here's the code to add to your `keyPressed` function:
+But how exactly does an integer tell us which key has been pressed?  Well that integer is actually the ASCII code for the key that was pressed.  You can check out the [ASCII wiki](http://en.wikipedia.org/wiki/ASCII "ASCII Wiki Page") for details, but for this chapter, it is enough to just know that ASCII is an agreed upon system for assigning numbers to characters.  And it turns out to be quite easy to check if that ASCII integer `key` is a particular character.  Let's see what this looks like in code.  Add these lines to your `keyPressed` function:
 
 ```c++
     if (key == 'r') drawingMode = rectangleMode;
@@ -315,10 +315,17 @@ So here's the code to add to your `keyPressed` function:
     else if (key == 't') drawingMode = triangleMode;
 ```
 
+In c++, you can compare an integer like `key` with a character through an inequality.  
 
-**[Note: Talk about ASCII vs int representations of characters]**
+**[Note: Explain char vs int, the double quote vs single quote.  Or is this in c++ chapter]**
 
 **[Note: the constants that oF provides for key presses]**
+
+Whew! Now when you run your code, you should be able to clear your screen and switch between brushes.  Now let's fill in those circle, line and triangle brushes!
+
+With our circle brush, let's play with transparency and then add in some color.  Unlike what we did with rectangles, we are going to layer our circles on top of each other until they become hazy and indistinct.
+
+So far, we've only used opaque grayscale colors, but you can make your colors transparent by adding an extra parameter to `ofSetColor`
 
 
 ### 1.2 Freeform Shapes ###
