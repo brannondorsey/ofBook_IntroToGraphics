@@ -423,6 +423,8 @@ What about using outlines instead of solid shapes inserting `ofNoFill();` into y
 
 **[Note: if there is time, extension with using an exponential decay for circle radius]**
 
+**[Note: Why does the hue break when using alpha == 1?]**
+
 ### 1.2 Freeform Shapes ###
 
 #### 1.2a Drawing to the screen, again! ####
