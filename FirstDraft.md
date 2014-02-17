@@ -559,9 +559,17 @@ But now you are a master of rectangles, circles, ellipses, lines and triangles, 
 
 In the last section, we drew our graphics directly onto the screen.  We were storing the graphics (the brush strokes) as pixels.  This is known as [raster graphics](http://en.wikipedia.org/wiki/Raster_graphics "Raster Graphics Wiki").  That means that it is hard for us to erase just the last brush stroke.  It also makes it hard for us to rescale graphics once they are drawn.  In contrast, there is something called [vector graphics](http://en.wikipedia.org/wiki/Vector_graphics "Vector Graphics Wiki").  The graphics that you draw as stored as a list of geometric objects (also called geometric primitives) instead of pixel values.  Those objects can be modified after you "place" them on your screen.  You can erase or rescale a brush stroke with ease.  You might already be familiar with the concept of vector graphics if you have used software like Adobe Illustrator, Inkscape, etc.
 
-Why does any of that matter?  We are moving into the territory of vector graphics by using freeform shapes in openFrameworks.  We are going to be using structures that allow us to store and draw paths (and polygons).
+Why does any of that matter?  We are moving into the territory of vector graphics by using freeform shapes in openFrameworks.  We are going to be using structures that allow us to store and draw paths.
 
-#### 1.2a Drawing to the screen, again! ####
+#### 1.2a Hello Path ####
+
+Create a new project and call it something like PathBrush.  Say hello to [`ofPolyline'](http://www.openframeworks.cc/documentation/graphics/ofPolyline.html "ofPolyline Documentation Page"], who is about to become our buddy.  What's an ofPolyline?  It is a data structure that allows you to store a series of sequential points and then draw them to create a line or shape.  Like with `ofColor` and `ofVec2f`, `ofPolyline` gives you a bunch of handy helper functions to make life easier.
+
+How about we get acquainted with ofPolyline in the context of some code?  Add this to your `draw` function of your newly created project's source file (.cpp):
+
+
+
+
 
 #### 1.2b The fun bits, again! ####
 
