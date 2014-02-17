@@ -409,6 +409,14 @@ Just remember that if you change the line width here, you will need to go to you
 
 ![Line Star Brush](images/intrographics_linestars.png "Results of using the line brush")
 
+Whew, time for the last brush from predefined shapes - the triangle!  And with this, we will talk about two new concepts: `ofVec2f` and `ofNoise`.
+
+First up is [`ofVec2f`](http://openframeworks.cc/documentation/math/ofVec2f.html "ofVec2f Documentation Page").  We've been defining a point in space by keeping two separate variables - one for the x position and one for the y position.  A triangle is defined by three points, so we would end up with six separate variables if we continued with our current tactic. FIt is annoying to have to 
+
+
+
+
+**Go back and add subheaders for each brush to better break up the sections and then title them with the concepts that will be introduced (and add that to the outline)**
 
 ### 1.2 Freeform Shapes ###
 
