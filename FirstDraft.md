@@ -432,6 +432,9 @@ First up is [`ofVec2f`](http://openframeworks.cc/documentation/math/ofVec2f.html
 	// But you can do what we just did above by adding or subtracting two vectors directly
 	ofVec2f offset(10.0, 30.0);
 	mousePos += offset;
+	
+	// You can also multiply and divide vectors
+	mousePos /= ofVec2f(2.0, 3.0); // This will half the x value and take a third of the y value
 
 ofVec2f isn't that scary, right?  And it is quite useful.  So let's start using it to build towards the triangle brush.  First step is to draw a triangle at the mouse cursor.  Specifically, we are going to draw an isoceles triangle:
 
@@ -479,7 +482,7 @@ You've used vectors!  Now, we are going to want to be able to rotate our triangl
 	
 	// Rotate the triangle points around the origin
 	float rotation = ofRandom(360);
-	p1.rotate(rotation);
+	p1.rotate(rotation);	// Uses degrees!
 	p2.rotate(rotation);
 	p3.rotate(rotation);
 	
@@ -494,7 +497,14 @@ You've used vectors!  Now, we are going to want to be able to rotate our triangl
 
 ![Rotating Triangle Brush](images/intrographics_rotatingtrianglebrush.png "Results of using the rotating triangle brush")
 
-See how ofVec2f simplifies your life?  (Or at least your code.)  If you were to move that rotation code to *after* we shifted the triangle to the mouse position, the code wouldn't work very nicely.  The way we are using `rotate` assumes that we want to rotate all of our points around the origin, which is (0,0).  But there is an alternate way to use `rotate` where you pass in two paramters: the rotation angle and a pivot point.  So you could shift your triangle to the mouse position and then use `p1.rotate(rotation, mousePos)` and everything would work just fine. 
+See how ofVec2f simplifies your life?  (Or at least your code.)  If you were to move that rotation code to *after* we shifted the triangle to the mouse position, the code wouldn't work very nicely.  The way we are using `rotate` assumes that we want to rotate all of our points around the origin, which is (0,0).  But there is an alternate way to use `rotate` where you pass in two paramters: the rotation angle and a pivot point.  So you could shift your triangle to the mouse position and then use `p1.rotate(rotation, mousePos)` - everything would work just fine!
+
+We're getting there!
+
+
+Remember when I said we needed to create our rectangle facing rightward?  Well, that means that our triangle has a rotation of 0 degrees to begin with, so when we go to rotate it using the `rotate` function, 
+
+
 
 **Go back and add subheaders for each brush to better break up the sections and then title them with the concepts that will be introduced (and add that to the outline)**
 
