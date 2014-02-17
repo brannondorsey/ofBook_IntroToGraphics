@@ -302,11 +302,11 @@ We are going to reorganize the `draw` function, so that it looks like this:
     }
 ```
 
-And for getting keyboard inputs, we are going to make use of the [`keyPressed(int key)`](http://openframeworks.cc/documentation/application/ofBaseApp.html#!show_keyPressed keyPressed "Documentation Page") function that is already built into your openFrameworks code.  Like `mousePressed`, this function is called any time a key press is registered.  We just need to use that integer that is passed in to keyPressed to switch our `drawingMode`.  "r" for rectangle mode, "c" for circle mode, etc.
+And for getting keyboard inputs, we are going to make use of the [`keyPressed(int key)`](http://openframeworks.cc/documentation/application/ofBaseApp.html#!show_keyPressed keyPressed "Documentation Page") function that is already built into your openFrameworks code.  Like `mousePressed`, this function is called any time a key is pressed.  We just need to use that integer that is passed in to keyPressed to switch our `drawingMode`.  "r" for rectangle mode, "c" for circle mode, etc.  
 
-**[Note: Talk about ASCII vs int representations of characters]**
+But how exactly does an integer tell us which key has been pressed?  Well that integer is actually the ASCII code for the key that was pressed.  You can check out the [ASCII wiki](http://en.wikipedia.org/wiki/ASCII "ASCII Wiki Page") for details, but for this chapter, it is enough to just know that ASCII is an agreed upon system for assigning numbers to characters.  And it turns out to be quite easy to check if that ASCII integer `key` is a particular character.  `key == 'r''
 
-**[Note: the constants that oF provides for key presses]**
+So here's the code to add to your `keyPressed` function:
 
 ```c++
     if (key == 'r') drawingMode = rectangleMode;
@@ -315,6 +315,10 @@ And for getting keyboard inputs, we are going to make use of the [`keyPressed(in
     else if (key == 't') drawingMode = triangleMode;
 ```
 
+
+**[Note: Talk about ASCII vs int representations of characters]**
+
+**[Note: the constants that oF provides for key presses]**
 
 
 ### 1.2 Freeform Shapes ###
