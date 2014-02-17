@@ -352,7 +352,38 @@ The result is something like drawing with glowing light.  You can play with the 
 
 ![Circle Glow Brush](images/intrographics_circleglow.png "Results of using the circle glow brush")
 
-Kind of cool right? you are probably tired of having to live in moody shades of gray for so long.
+Kind of cool right?  You are probably tired of having to live in moody shades of gray for so long.  Well, `ofSetColor` has some alternate forms that make use of the RGB color model.  If you haven't heard of RGB before, you can check out the [wiki](http://en.wikipedia.org/wiki/RGB_color_model "Wiki on RGB Color Model").  It allows you to specify a color through quantifying the amount of red, blue and green light in the color.  We refer to these color components as channels, and each channel can take on a value from 0 to 255.  (Alpha is another possible channel.) So here are the forms of `ofSetColor` we can now use:
+
+**[Note: would it be helpful to somewhere explain 24-bit/32-bit color and where 256 comes from?]**
+
+**[Note: would it be helpful to have a RGB diagram?]**
+
+```c++
+	ofSetColor(255); // Grayscale white
+	ofSetColor(255, 10); // Very transparent grayscale white
+	ofSetColor(255, 0, 0); // Red! Hooray for color :)
+	ofSetColor(255, 0, 0, 10); // Very transparent red
+```
+
+There's another way we can use `ofSetColor` that is useful.  Meet [`ofColor`](http://openframeworks.cc/documentation/types/ofColor.html "ofColor Documentation Page"].  This is a handy class that openFrameworks provides for handling color that allows you to do some math.  You can define a color in a number of ways:
+
+```c++
+	ofColor green(0, 255, 0);
+	ofSetColor(green);
+	
+	ofColor blue = ofColor(0,0,255);
+	ofSetColor(blue);
+	
+	ofColor red;
+	red.r = 255;
+	red.g = 0;
+	red.b = 0;
+	ofSetColor(red);
+	
+	ofColor orange;
+	orange.set(255, 165, 0);
+	ofSetColor(orange);
+```
 
 
 
