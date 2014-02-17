@@ -10,18 +10,16 @@
 	- 1.2 Freeform Shapes
 		-  1.2a Drawing to the screen, again!
 		-  1.2b The fun bits, again!
-- 2. TBD
-- 3. TDB
+- 2. Moving Coordinate System
+- 3. Recursion
 
 ## 1. Drawing Shapes.  Then Drawing Many, Many, Many Shapes ##
+
+This section needs an introduction explaining the flow of this section - we are making generative brushes because it is allows for us to jump into graphics with minimal math+conceptual overhead but it still allows for hitting all the graphical concepts.  (But it still leaves room for adding in advanced math+concepts.)
 
 **[Note: Insert Section on Setup/Update/Draw]**
 
 **[Note: Insert Section on XY coordinate system]**
-
-You might be wondering why we would start with making digital brushes?   
-
-We will get coding as soon as possible and survive this chapter together.
 
 To get started creating brushes, we need to find the basic building blocks of graphics.  You can classify the 2D graphics functions that openFrameworks provides into two categories: predefined shapes and freeform shapes.  The predefines shapes are rectangles, circles, triangles and straight lines.  The freeform shapes are polygons and paths.
 
@@ -449,6 +447,4 @@ What about using outlines instead of solid shapes inserting `ofNoFill();` into y
 #### 1.2b The fun bits, again! ####
 
 
-
-GO BACK AND INTEGRATE GOOGLE DOC INFO INTO HERE
 
