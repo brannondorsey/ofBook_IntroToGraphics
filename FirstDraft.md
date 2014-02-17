@@ -457,10 +457,28 @@ So we are defining the three points of the triangle using three points set relat
 
 ![Single Triangle Brush](images/intrographics_singletrianglebrush.png "Results of using the single triangle brush")
 
-You've used vectors!  Now, we are going to want to be able to rotate our triangles to point in any direction.  Previously, we've written out the trigonometry using sin and cos to figure out rotations.  But! `ofVec2f` has a [`rotate`](http://www.openframeworks.cc/documentation/math/ofVec2f.html#show_rotate "ofVec2f's rotate function documentation page") function.
+You've used vectors!  Now, we are going to want to be able to rotate our triangles to point in any direction.  Previously, we've fearlessly used trigonometry (sin and cos) for our rotations.  But! `ofVec2f` has a [`rotate`](http://www.openframeworks.cc/documentation/math/ofVec2f.html#show_rotate "ofVec2f's rotate function documentation page") function.  Let's try adding a rotation into our code:
+
+	ofVec2f mousePos(mouseX, mouseY);
+	float triangleHeight = 100;
+	float triangleSide = triangleHeight/2.0;
+	ofVec2f p1(0, triangleSide/2.0);
+	ofVec2f p2(triangleHeight, 0);
+	ofVec2f p3(0, -triangleSide/2.0);
+	
+	float rotation = ofRandom(360);
+	p1.rotate(rotation);
+	p2.rotate(rotation);
+	p3.rotate(rotation);
+	
+	p1 += mousePos;
+	p2 += mousePos;
+	p3 += mousePos;
+	ofSetColor(255, 50);
+	ofTriangle(p1, p2, p3);
 
 
-
+![Rotating Triangle Brush](images/intrographics_rotatingtrianglebrush.png "Results of using the rotating triangle brush")
 
 **Go back and add subheaders for each brush to better break up the sections and then title them with the concepts that will be introduced (and add that to the outline)**
 
