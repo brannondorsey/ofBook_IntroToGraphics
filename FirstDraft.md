@@ -380,18 +380,35 @@ What about using outlines instead of solid shapes inserting `ofNoFill();` into y
 
 **[Note: Why does the hue break when using alpha == 1?]**
 
-	int numShapes = 50;
-	int minLength = 50;
-	int maxLength = 250;
-	for (int i=0; i<numShapes; ++i) {
-		float distance = ofRandom(minLength, maxLength);
+Rectangles, check.  Circle and ellipses, check.  Lines.  We're all familiar with an asterisk, right?  We are going to create a brush that draws a bunch of lines that all intersect at their midpoints - something like an asterisk - and look like a twinkling star.  
+
+The code you've used before is almost all that you need to create this brush.  We will draw a set of randomly sized lines that extend out from the mouse position in random directions.  One new wrinkle, if we want our brush to look "twinkly", is that we want our brush to be brightest in the center and fade towards the periphery.  So let's add this in the line brush section of the `draw` function:
+
+	int numLines = 30;
+	int minRadius = 25;
+	int maxRadius = 125;
+	for (int i=0; i<numLines; ++i) {
+		float distance = ofRandom(minRadius, maxRadius);
 		float angle = ofRandom(2.0*PI);
 		float xoffset = cos(angle) * distance;
 		float yoffset = sin(angle) * distance;
-		float alpha = ofMap(distance, minLength, maxLength, 50, 0);
+		float alpha = ofMap(distance, minRadius, maxRadius, 50, 0);
 		ofSetColor(255, alpha);
-		ofLine(mouseX-xoffset/2.0, mouseY-yoffset/2.0, mouseX+xoffset/2.0, mouseY+yoffset/2.0);
+		ofLine(mouseX, mouseY, mouseX+xoffset, mouseY+yoffset);
 	}
+
+What have we done with the alpha?  We've introduced a new function called ['ofMap'](http://www.openframeworks.cc/documentation/math/ofMath.html#show_ofMap "ofMap Documentation Page").  This provides a quick way to do a linear interpolation **[note: link to math]**.  To get a "twinkle," We want our shortest lines to be the most opaque and our longer lines to be the most transparent.  We want to tie the alpha parameter to the distance parameter.  `ofMap` takes a value from one range and maps it into another range like this: `ofMap(float value, float inputMin, float inputMax, float outputMin, float outputMax)`.  We tell it that distance is a value in-between minRadius and maxRadius and that we want it mapped such a distance value of 125 (maxRadius) yields an alpha value of 50 and a distance value of 25 (minRadius) yields an alpha value of 0.  The longer the line, the more transparent the color.
+
+If you wanted to, you could also play with the line thickness:
+	
+	ofSetLineWidth(ofRandom(1.0, 5.0));
+
+Just remember that if you change the line width here, you will need to go to your other brushes and set the line width back to 1. 
+
+**[Note: maybe expand upon linking variables together - now that you know how to do this, what could you have done with your prior brushes to make them cooler?]**
+
+![Line Star Brush](images/intrographics_linestars.png "Results of using the line brush")
+
 
 ### 1.2 Freeform Shapes ###
 
