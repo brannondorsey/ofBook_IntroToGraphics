@@ -421,6 +421,8 @@ What about using outlines instead of solid shapes inserting `ofNoFill();` into y
 
 ![Circle Squiggle Brush](images/intrographics_circlesquiggles.png "Results of using the circle brush without fill")
 
+**[Note: opportunity to explain push/pop style]**
+
 **[Note: if there is time, extension with using an exponential decay for circle radius]**
 
 **[Note: Why does the hue break when using alpha == 1?]**
