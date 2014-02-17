@@ -2,6 +2,17 @@
 
 **Introduction TDB**
 
+## 0. Outline
+- 1. Drawing Shapes. Then Drawing Many, Many, Many Shapes
+	- 1.1 Predefined Shapes
+		-  1.1a Drawing to the screen! 
+		-  1.1b Drawing to the screen! The fun bits.
+	- 1.2 Freeform Shapes
+		-  1.1a Drawing to the screen, again!
+		-  1.1b The fun bits, again!
+- 2. TBD
+- 3. TDB
+
 ## 1. Drawing Shapes.  Then Drawing Many, Many, Many Shapes ##
 
 **[Note: Insert Section on Setup/Update/Draw]**
