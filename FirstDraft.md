@@ -415,7 +415,7 @@ Whew, time for the last brush from predefined shapes - the triangle!  The genera
 
 But to be able to get to that, we will need to introduce two new concepts: `ofVec2f` and `ofNoise`.
 
-First up is [`ofVec2f`](http://openframeworks.cc/documentation/math/ofVec2f.html "ofVec2f Documentation Page").  We've been defining a point in space by keeping two separate variables - one for the x position and one for the y position.  A triangle is defined by three points, so we would end up with six separate variables if we continued with our current tactic.  `ofVec2f` allows us to hold both the x and y coordinates in one variable (and comes with some handy math operations).  You can use an ofVec2f variable like this:
+First up is [`ofVec2f`](http://openframeworks.cc/documentation/math/ofVec2f.html "ofVec2f Documentation Page").  We've been defining a point in space by keeping two separate variables - one for the x position and one for the y position.  A triangle is defined by three points, so we would end up with six separate variables if we continued with our current tactic.  `ofVec2f` is a vector, and it allows us to hold both the x and y coordinates in one variable (and comes with some handy math operations).  You can use an ofVec2f variable like this:
 
 	ofVec2f mousePos(mouseX, mouseY);
 	
@@ -439,21 +439,25 @@ ofVec2f isn't that scary, right?  And it is quite useful.  So let's start using 
 
 **[Note: Stolen graphics from wolfram, generate something similar later]**
 
-An isoceles triangle is one that has two sides that are of equal length (labeled as b) and one side of a different length (labeled a).  You can also see that the height (labeled h) is drawn in the figure.  We are going to use draw the triangle using one side (a) and the height (h).
+An isoceles triangle is one that has two sides that are of equal length (labeled as b) and one side of a different length (labeled a).  You can also see that the height (labeled h) is drawn in the figure.  We are going to use draw a skinny triangle using one side (a) and the height (h).  It will become important later, but we are going to draw our triangle starting from the mouse cursor and pointing to the right.  Add these lines to the triangle section of your `draw` function:
 
 	ofVec2f mousePos(mouseX, mouseY);
 	float triangleHeight = 100;
 	float triangleSide = triangleHeight/2.0;
 	ofVec2f p1(0, triangleSide/2.0);
 	ofVec2f p2(triangleHeight, 0);
-	ofVec3f p3(0, -triangleSide/2.0);
+	ofVec2f p3(0, -triangleSide/2.0);
 	p1 += mousePos;
 	p2 += mousePos;
 	p3 += mousePos;
 	ofSetColor(255, 50);
 	ofTriangle(p1, p2, p3);
-	
 
+So we are defining the three points of the triangle using three points set relative to the mouse position.  If all goes well, you will end up with something like this:
+
+![Single Triangle Brush](images/intrographics_singletrianglebrush.png "Results of using the single triangle brush")
+
+You've used vectors!  Now, we are going to want to be able to rotate our triangles to point in any direction.  Previously, we've written out the trigonometry using sin and cos to figure out rotations.  But! `ofVec2f` has a [`rotate`](http://www.openframeworks.cc/documentation/math/ofVec2f.html#show_rotate "ofVec2f's rotate function documentation page") function.
 
 
 
