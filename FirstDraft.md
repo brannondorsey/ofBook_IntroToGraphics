@@ -3,7 +3,7 @@
 **Introduction TDB**
 
 ## 0. Outline
-- 1. [Drawing Shapes. Then Drawing Many, Many, Many Shapes](##1.DrawingShapes.ThenDrawingMany,Many,ManyShapes)
+- 1. [Drawing Shapes. Then Drawing Many, Many, Many Shapes](##1-drawing-shapes--then-drawing-many-many-many-shapes)
 	- 1.1 Predefined Shapes
 		-  1.1a Drawing to the screen! 
 		-  1.1b Drawing to the screen! The fun bits.
