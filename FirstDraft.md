@@ -498,7 +498,7 @@ You've used vectors!  Now, we are going to want to be able to rotate our triangl
 
 See how ofVec2f simplifies your life?  (Or at least your code.)  If you were to move that rotation code to *after* we shifted the triangle to the mouse position, the code wouldn't work very nicely.  The way we are using `rotate` assumes that we want to rotate all of our points around the origin, which is (0,0).  But there is an alternate way to use `rotate` where you pass in two paramters: the rotation angle and a pivot point.  So you could shift your triangle to the mouse position and then use `p1.rotate(rotation, mousePos)` - everything would work just fine!
 
-We're getting there!
+We're getting there!  Next step, let's integrate this code into our prior approach of drawing multiple shapes that are offset from the mouse position:
 
 	ofVec2f mousePos(mouseX, mouseY);
 	
@@ -523,19 +523,22 @@ We're getting there!
 		p2.rotate(rotation);
 		p3.rotate(rotation);
 		
-		// Now we are going to 
 		ofVec2f triangleOffset(offsetDistance, 0.0);
 		triangleOffset.rotate(rotation);
+		
 		p1 += mousePos + triangleOffset;
 		p2 += mousePos + triangleOffset;
 		p3 += mousePos + triangleOffset;
+		
 		ofSetColor(255, alpha);
 		ofTriangle(p1, p2, p3);
 	}
 
+So we are now using `of2Vec` to figure out our offset.  To do that, we need to create a vector that points rightward.  Why rightward?  Well, that's the 0 degree direction.  This is why we initially created our triangles pointing rightward from the mouse.  Both our offset and our triangle are pointing in the same direction.  So when we apply the same rotation to both of them, they stay in sync (i.e. both pointing away from the mouse cursor).  See what happens if you try doing `triangleOffset.rotate(rotation+90);`  You'll get a swirling blob of triangles.   Hey, you might even like that effect better than the original.  
 
-Remember when I said we needed to create our rectangle facing rightward?  Well, that means that our triangle has a rotation of 0 degrees to begin with, so when we go to rotate it using the `rotate` function, 
+**[Note: this explanation may need clarification; also, possibly introduce vector length here?]**
 
+Okay, remember when I mentioned `ofNoise`?  It's time.
 
 
 **Go back and add subheaders for each brush to better break up the sections and then title them with the concepts that will be introduced (and add that to the outline)**
