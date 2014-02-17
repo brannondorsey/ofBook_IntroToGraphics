@@ -413,9 +413,7 @@ Whew, time for the last brush from predefined shapes - the triangle!  The genera
 
 ![Triangle Brush Sample](images/intrographics_trianglebrushsample.png "Sample how the triangle brush will look")
 
-But to be able to get to that, we will need to introduce two new concepts: `ofVec2f` and `ofNoise`.
-
-First up is [`ofVec2f`](http://openframeworks.cc/documentation/math/ofVec2f.html "ofVec2f Documentation Page").  We've been defining a point in space by keeping two separate variables - one for the x position and one for the y position.  A triangle is defined by three points, so we would end up with six separate variables if we continued with our current tactic.  `ofVec2f` is a vector, and it allows us to hold both the x and y coordinates in one variable (and comes with some handy math operations).  You can use an ofVec2f variable like this:
+But to be able to get to that, we will need to introduce [`ofVec2f`](http://openframeworks.cc/documentation/math/ofVec2f.html "ofVec2f Documentation Page").  We've been defining a point in space by keeping two separate variables - one for the x position and one for the y position.  A triangle is defined by three points, so we would end up with six separate variables if we continued with our current tactic.  `ofVec2f` is a vector, and it allows us to hold both the x and y coordinates in one variable (and comes with some handy math operations).  You can use an ofVec2f variable like this:
 
 	ofVec2f mousePos(mouseX, mouseY);
 	
@@ -538,7 +536,15 @@ So we are now using `of2Vec` to figure out our offset.  To do that, we need to c
 
 **[Note: this explanation may need clarification; also, possibly introduce vector length here?]**
 
-Okay, remember when I mentioned `ofNoise`?  It's time.
+How about we add some color?  I won't get offended if you'd rather use your own colors.
+
+		ofColor aqua(0, 252, 255, alpha);
+		ofColor purple(198, 0, 205, alpha);
+		ofColor inbetween = aqua.getLerped(purple, ofRandom(1.0));
+		ofSetColor(inbetween);
+
+![Triangle Brush Final](images/intrographics_trianglebrushfinal.png "Results of using the final triangle brush")	
+
 
 
 **Go back and add subheaders for each brush to better break up the sections and then title them with the concepts that will be introduced (and add that to the outline)**
