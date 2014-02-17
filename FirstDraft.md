@@ -359,33 +359,56 @@ Kind of cool right?  You are probably tired of having to live in moody shades of
 **[Note: would it be helpful to have a RGB diagram?]**
 
 ```c++
-	ofSetColor(255); // Grayscale white
+	ofSetColor(255); // Opaque grayscale white
 	ofSetColor(255, 10); // Very transparent grayscale white
-	ofSetColor(255, 0, 0); // Red! Hooray for color :)
+	ofSetColor(255, 0, 0); // Opaque red! Hooray for color :)
 	ofSetColor(255, 0, 0, 10); // Very transparent red
 ```
 
-There's another way we can use `ofSetColor` that is useful.  Meet [`ofColor`](http://openframeworks.cc/documentation/types/ofColor.html "ofColor Documentation Page"].  This is a handy class that openFrameworks provides for handling color that allows you to do some math.  You can define a color in a number of ways:
+So go ahead and modify your `ofSetColor` line of code inside of your circle brush to use some color you like.  I'll just leave this orange here: `ofSetColor(255, 103, 0, 3);`
+
+There's another way we can use `ofSetColor` that is useful.  Meet [`ofColor`](http://openframeworks.cc/documentation/types/ofColor.html "ofColor Documentation Page"].  This is a handy class that openFrameworks provides for handling colors that allows you to do some color math (among other things). Here are some examples of defining and modifying colors:
 
 ```c++
-	ofColor green(0, 255, 0);
-	ofSetColor(green);
+	ofColor orange(255, 132, 0); // Opaque orange color - specified using RGB
 	
-	ofColor blue = ofColor(0,0,255);
-	ofSetColor(blue);
+	ofColor blue(0, 0, 255, 50); // Transparent blue color - specified using RGBA
 	
-	ofColor red;
-	red.r = 255;
-	red.g = 0;
-	red.b = 0;
-	ofSetColor(red);
+	// You can access the red, green, blue and alpha channels like this:
+	ofColor green(0, 0, 255, 255);
+	cout << "Red channel:" << green.r << endl;
+	cout << "Green channel:" << green.g << endl;
+	cout << "Blue channel:" << green.b << endl;
+	cout << "Alpha channel:" << green.a << endl;
 	
-	ofColor orange;
-	orange.set(255, 165, 0);
-	ofSetColor(orange);
+	// You can also set the red, green, blue and alpha channels like this:
+	ofColor yellow;
+	yellow.r = 255;
+	yellow.b = 0;
+	yellow.g = 255;
+	yellow.a = 255;
 ```
 
+Now, let's say that instead of just using an orange or a red color for our circle brush, what if we wanted to pick a random color in-between orange and red?  `ofColor` has a solution for using what is called [linear interpolation](http://en.wikipedia.org/wiki/Linear_interpolation "Wiki for Linear Interpolation"].  Replace your `ofSetColor` line of code with these four lines of code: 
 
+**[Note: explain lerp for the math averse and explain the syntax]**
+
+```c++
+                ofColor orange(255, 132, 0, alpha);
+                ofColor red(255, 6, 0, alpha);
+                ofColor inbetween = orange.getLerped(red, ofRandom(1.0));
+                ofSetColor(inbetween);
+```
+
+Maybe you aren't a fan of circles?  You can turn your circle into an ellipse using:
+
+```c++
+		ofEllipse(mouseX+xoffset, mouseY+yoffset, radius*ofRandom(0.8, 1.2), radius*ofRandom(0.8, 1.2));
+```
+
+What about using outlines instead of solid shapes inserting `ofNoFill();` into your circle brush code?  If you do that, try increasing your `alpha` to 10 and lowering your `radiusStepSize` to 1.  (Don't forget that if you start using `ofNoFill` in your circle brush, you should add `ofFill` to your rectangle brush!)
+
+![Circle Squiggle Brush](images/intrographics_circlesquiggles.png "Results of using the circle brush without fill")
 
 **[Note: if there is time, extension with using an exponential decay for circle radius]**
 
