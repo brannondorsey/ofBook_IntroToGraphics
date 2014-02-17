@@ -8,8 +8,8 @@
 		-  1.1a Drawing to the screen! 
 		-  1.1b Drawing to the screen! The fun bits.
 	- 1.2 Freeform Shapes
-		-  1.1a Drawing to the screen, again!
-		-  1.1b The fun bits, again!
+		-  1.2a Drawing to the screen, again!
+		-  1.2b The fun bits, again!
 - 2. TBD
 - 3. TDB
 
@@ -425,9 +425,9 @@ What about using outlines instead of solid shapes inserting `ofNoFill();` into y
 
 ### 1.2 Freeform Shapes ###
 
-#### 1.2a Drawing to the screen! ####
+#### 1.2a Drawing to the screen, again! ####
 
-#### 1.2b Drawing to the screen! The fun bits. ####
+#### 1.2b The fun bits, again! ####
 
 
 
