@@ -442,14 +442,21 @@ ofVec2f isn't that scary, right?  And it is quite useful.  So let's start using 
 An isoceles triangle is one that has two sides that are of equal length (labeled as b) and one side of a different length (labeled a).  You can also see that the height (labeled h) is drawn in the figure.  We are going to use draw a skinny triangle using one side (a) and the height (h).  It will become important later, but we are going to draw our triangle starting from the mouse cursor and pointing to the right.  Add these lines to the triangle section of your `draw` function:
 
 	ofVec2f mousePos(mouseX, mouseY);
+	
+	// Define the parameters of the triangle
 	float triangleHeight = 100;
 	float triangleSide = triangleHeight/2.0;
+	
+	// Define a triangle around the origin (0,0)
 	ofVec2f p1(0, triangleSide/2.0);
 	ofVec2f p2(triangleHeight, 0);
 	ofVec2f p3(0, -triangleSide/2.0);
+	
+	// Shift the triangle to the mouse position
 	p1 += mousePos;
 	p2 += mousePos;
 	p3 += mousePos;
+	
 	ofSetColor(255, 50);
 	ofTriangle(p1, p2, p3);
 
@@ -460,25 +467,34 @@ So we are defining the three points of the triangle using three points set relat
 You've used vectors!  Now, we are going to want to be able to rotate our triangles to point in any direction.  Previously, we've fearlessly used trigonometry (sin and cos) for our rotations.  But! `ofVec2f` has a [`rotate`](http://www.openframeworks.cc/documentation/math/ofVec2f.html#show_rotate "ofVec2f's rotate function documentation page") function.  Let's try adding a rotation into our code:
 
 	ofVec2f mousePos(mouseX, mouseY);
+	
+	// Define the parameters of the triangle
 	float triangleHeight = 100;
 	float triangleSide = triangleHeight/2.0;
+	
+	// Define a triangle around the origin (0,0)
 	ofVec2f p1(0, triangleSide/2.0);
 	ofVec2f p2(triangleHeight, 0);
 	ofVec2f p3(0, -triangleSide/2.0);
 	
+	// Rotate the triangle points around the origin
 	float rotation = ofRandom(360);
 	p1.rotate(rotation);
 	p2.rotate(rotation);
 	p3.rotate(rotation);
 	
+	// Shift the triangle to the mouse position
 	p1 += mousePos;
 	p2 += mousePos;
 	p3 += mousePos;
+	
 	ofSetColor(255, 50);
 	ofTriangle(p1, p2, p3);
 
 
 ![Rotating Triangle Brush](images/intrographics_rotatingtrianglebrush.png "Results of using the rotating triangle brush")
+
+See how ofVec2f simplifies your life?  (Or at least your code.)  If you were to move that rotation code to *after* we shifted the triangle to the mouse position, the code wouldn't work very nicely.  The way we are using `rotate` assumes that we want to rotate all of our points around the origin, which is (0,0).  But there is an alternate way to use `rotate` where you pass in two paramters: the rotation angle and a pivot point.  So you could shift your triangle to the mouse position and then use `p1.rotate(rotation, mousePos)` and everything would work just fine. 
 
 **Go back and add subheaders for each brush to better break up the sections and then title them with the concepts that will be introduced (and add that to the outline)**
 
