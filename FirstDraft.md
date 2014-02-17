@@ -137,11 +137,11 @@ And add this into the `setup` function of your source file (.cpp):
 Now that the boolean variable is set up, add these lines to your `mousePressed` and `mouseReleased` functions:
 
 	void testApp::mousePressed(int x, int y, int button){
-	    if (button == OF_MOUSE_BUTTON_LEFT) isLeftMousePressed = true;
+		if (button == OF_MOUSE_BUTTON_LEFT) isLeftMousePressed = true;
 	}
 	
 	void testApp::mouseReleased(int x, int y, int button){
-	    if (button == OF_MOUSE_BUTTON_LEFT) isLeftMousePressed = false;
+		if (button == OF_MOUSE_BUTTON_LEFT) isLeftMousePressed = false;
 	}
 
 Whenever a button on the mouse is pressed or released, we want to check if that button is the left mouse button.  If it is, then we can adjust our `isLefMousePressed` boolean appropriately.  The `button` variable is an integer that identifies which button is pressed/released, and openFrameworks provides some handy constants that we can use to identify the button in a human-readable way (`OF_MOUSE_BUTTON_LEFT`, `OF_MOUSE_BUTTON_MIDDLE` and `OF_MOUSE_BUTTON_RIGHT`).  If you really wanted, you *could* just say `button == 0` to test for whether the pressed/released button is the left mouse button.
@@ -149,9 +149,9 @@ Whenever a button on the mouse is pressed or released, we want to check if that 
 Let's hop into the `draw` function and start making use of our mouse information:
 
 	if (isLeftMousePressed) {
-	    ofSetColor(255);
-	    ofSetRectMode(OF_RECTMODE_CENTER);
-	    ofRect(mouseX, mouseY, 50, 50);
+		ofSetColor(255);
+		ofSetRectMode(OF_RECTMODE_CENTER);
+		ofRect(mouseX, mouseY, 50, 50);
 	}
 
 [`ofSetRectMode`](http://www.openframeworks.cc/documentation/graphics/ofGraphics.html#show_ofSetRectMode "ofSetRectMode Documentation Page") allows us to control how the x and y positions we pass into `ofRect` are used to draw a rectangle.  Like with the mouse button constants, openFrameworks provides some rectangle mode constants for us to use: `OF_RECTMODE_CORNER` and `OF_RECTMODE_CENTER`.  By default rectangles are drawn by interpreting the x and y values you pass to it as the coordinates of the upper left corner (`OF_RECTMODE_CORNER`).  For our purposes, it is more convient for us to specify the center of the rectangle (`OF_RECTMODE_CENTER`) so that our rectangle is centered over the mouse position.  So we draw the center of our white, 50 x 50 rectangle at the mouse position using `mouseX` and `mouseY`.
@@ -177,16 +177,16 @@ Remember that we are using grayscale colors and that they take on values between
 So whenever you are done drawing weird rectangle snakes, we can move on to adding repetition.  Instead of drawing a single rectangle every frame during which the left mouse button is pressed, we can draw a burst of randomized rectangles.  To create that burst, we are going use a for loop to generate a set some number of rectangles where each rectangle's parameters are randomly chosen from a set of values.  So what can we randomize?  Grayscale color, width and height are easy candidates.  We can also use a small positive or negative value to randomly offset each rectangle from mouse position.  Modify your `draw` function to look like this:  
 
 	if (isLeftMousePressed) {
-	    ofSetRectMode(OF_RECTMODE_CENTER);
-	    int numRects = 10;
-	    for (int r=0; r<numRects; r++) {
-	        ofSetColor(ofRandom(50, 255));
-	        float width = ofRandom(5, 20);
-	        float height = ofRandom(5, 20);
-	        float xoffset = ofRandom(-40, 40);
-	        float yoffset = ofRandom(-40, 40);
-	        ofRect(mouseX+xoffset, mouseY+yoffset, width, height);
-	    }
+		ofSetRectMode(OF_RECTMODE_CENTER);
+		int numRects = 10;
+		for (int r=0; r<numRects; r++) {
+			ofSetColor(ofRandom(50, 255));
+			float width = ofRandom(5, 20);
+			float height = ofRandom(5, 20);
+			float xoffset = ofRandom(-40, 40);
+			float yoffset = ofRandom(-40, 40);
+			ofRect(mouseX+xoffset, mouseY+yoffset, width, height);
+		}
 	}
 
 But let's add one more thing before you hit run.  Into `setup`, add:
@@ -208,14 +208,14 @@ So where does this leave us in terms of our code?  If we start at the mouse posi
 **[Note: Explain the trig conversion from polar to cartesian, or point to the math chapter section?]**
 
 	for (int r=0; r<numRects; r++) {
-	    ofSetColor(ofRandom(50, 255));
-	    float width = ofRandom(5, 20);
-	    float height = ofRandom(5, 20);
-	    float angle = ofRandom(2.0*PI);
-	    float distance = ofRandom(35);
-	    float xoffset = cos(angle) * distance;
-	    float yoffset = sin(angle) * distance;
-	    ofRect(mouseX+xoffset, mouseY+yoffset, width, height);
+		ofSetColor(ofRandom(50, 255));
+		float width = ofRandom(5, 20);
+		float height = ofRandom(5, 20);
+		float angle = ofRandom(2.0*PI);
+		float distance = ofRandom(35);
+		float xoffset = cos(angle) * distance;
+		float yoffset = sin(angle) * distance;
+		ofRect(mouseX+xoffset, mouseY+yoffset, width, height);
 	}
 
 **[Note: explain radians vs degrees]**
@@ -268,18 +268,18 @@ We are going to reorganize the `draw` function, so that it looks like this:
 	// If left mouse button pressed, draw the appropriate brush
 	if (isLeftMousePressed) {
 	
-	if (drawingMode == rectangleMode) {
-	    // Insert the rectangle drawing code you wrote here
-	}
-	
-	else if (drawingMode == circleMode) {
-	}
-	
-	else if (drawingMode == lineMode) {
-	}
-	
-	else if (drawingMode == triangleMode) {
-	}
+		if (drawingMode == rectangleMode) {
+			// Insert the rectangle drawing code you wrote here
+		}
+		
+		else if (drawingMode == circleMode) {
+		}
+		
+		else if (drawingMode == lineMode) {
+		}
+		
+		else if (drawingMode == triangleMode) {
+		}
 	}
 
 And for getting keyboard inputs, we are going to make use of the [`keyPressed(int key)`](http://openframeworks.cc/documentation/application/ofBaseApp.html#!show_keyPressed keyPressed "Documentation Page") function that is already built into your openFrameworks code.  Like `mousePressed`, this function is called any time a key is pressed.  We just need to use that integer that is passed in to keyPressed to switch our `drawingMode`.  "r" for rectangle mode, "c" for circle mode, etc.  
@@ -312,12 +312,12 @@ Now we can start working on our `draw` function.  We will use the `angle`, `dist
 	int alpha = 3;
 	int maxOffsetDistance = 100;
 	for (int radius=maxRadius; radius>0; radius-=radiusStepSize) {
-	    float angle = ofRandom(2.0*PI);
-	    float distance = ofRandom(maxOffsetDistance);
-	    float xoffset = cos(angle) * distance;
-	    float yoffset = sin(angle) * distance;
-	    ofSetColor(255, alpha);
-	    ofCircle(mouseX+xoffset, mouseY+yoffset, radius);
+		float angle = ofRandom(2.0*PI);
+		float distance = ofRandom(maxOffsetDistance);
+		float xoffset = cos(angle) * distance;
+		float yoffset = sin(angle) * distance;
+		ofSetColor(255, alpha);
+		ofCircle(mouseX+xoffset, mouseY+yoffset, radius);
 	}
 
 The result is something like drawing with glowing light.  You can play with the maxRadius, radiusStepSize, alpha and maxOffsetDistance to get make that glowing effect stronger, weaker, narrower or wider.
@@ -384,13 +384,13 @@ What about using outlines instead of solid shapes inserting `ofNoFill();` into y
 	int minLength = 50;
 	int maxLength = 250;
 	for (int i=0; i<numShapes; ++i) {
-	    float distance = ofRandom(minLength, maxLength);
-	    float angle = ofRandom(2.0*PI);
-	    float xoffset = cos(angle) * distance;
-	    float yoffset = sin(angle) * distance;
-	    float alpha = ofMap(distance, minLength, maxLength, 50, 0);
-	    ofSetColor(255, alpha);
-	    ofLine(mouseX-xoffset/2.0, mouseY-yoffset/2.0, mouseX+xoffset/2.0, mouseY+yoffset/2.0);
+		float distance = ofRandom(minLength, maxLength);
+		float angle = ofRandom(2.0*PI);
+		float xoffset = cos(angle) * distance;
+		float yoffset = sin(angle) * distance;
+		float alpha = ofMap(distance, minLength, maxLength, 50, 0);
+		ofSetColor(255, alpha);
+		ofLine(mouseX-xoffset/2.0, mouseY-yoffset/2.0, mouseX+xoffset/2.0, mouseY+yoffset/2.0);
 	}
 
 ### 1.2 Freeform Shapes ###
