@@ -425,6 +425,21 @@ What about using outlines instead of solid shapes inserting `ofNoFill();` into y
 
 **[Note: Why does the hue break when using alpha == 1?]**
 
+```c++
+            int numShapes = 50;
+            int minLength = 50;
+            int maxLength = 250;
+            for (int i=0; i<numShapes; ++i) {
+                float distance = ofRandom(minLength, maxLength);
+                float angle = ofRandom(2.0*PI);
+                float xoffset = cos(angle) * distance;
+                float yoffset = sin(angle) * distance;
+                float alpha = ofMap(distance, minLength, maxLength, 50, 0);
+                ofSetColor(255, alpha);
+                ofLine(mouseX-xoffset/2.0, mouseY-yoffset/2.0, mouseX+xoffset/2.0, mouseY+yoffset/2.0);
+            }
+```
+
 ### 1.2 Freeform Shapes ###
 
 #### 1.2a Drawing to the screen, again! ####
