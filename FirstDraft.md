@@ -565,8 +565,54 @@ Why does any of that matter?  We are moving into the territory of vector graphic
 
 Create a new project and call it something like PathBrush.  Say hello to [`ofPolyline'](http://www.openframeworks.cc/documentation/graphics/ofPolyline.html "ofPolyline Documentation Page"], who is about to become our buddy.  What's an ofPolyline?  It is a data structure that allows you to store a series of sequential points and then draw them to create a line or shape.  Like with `ofColor` and `ofVec2f`, `ofPolyline` gives you a bunch of handy helper functions to make life easier.
 
-How about we get acquainted with ofPolyline in the context of some code?  Add this to your `draw` function of your newly created project's source file (.cpp):
+How about we get acquainted with ofPolyline in the context of some code?  Let's define three `ofPolylines` in the header file (.h):
 
+	ofPolyline straightSegmentPolyline;
+	ofPolyline curvedSegmentPolyline;
+	ofPolyline closedShapePolyline;
+
+Now, we can fill those polylines with points in the `setup` function of the source file (.cpp):
+
+	straightSegmentPolyline.addVertex(100, 100);
+	straightSegmentPolyline.addVertex(150, 150);
+	straightSegmentPolyline.addVertex(200, 100);
+	straightSegmentPolyline.addVertex(250, 150);
+	straightSegmentPolyline.addVertex(300, 100);
+	
+	curvedSegmentPolyline.curveTo(350, 100); // Necessary Duplicate
+	curvedSegmentPolyline.curveTo(350, 100);
+	curvedSegmentPolyline.curveTo(400, 150);
+	curvedSegmentPolyline.curveTo(450, 100);
+	curvedSegmentPolyline.curveTo(500, 150);
+	curvedSegmentPolyline.curveTo(550, 100);
+	curvedSegmentPolyline.curveTo(550, 100); // Necessary Duplicate
+	
+	closedShapePolyline.addVertex(600, 125);
+	closedShapePolyline.addVertex(700, 100);
+	closedShapePolyline.addVertex(800, 125);
+	closedShapePolyline.addVertex(700, 150);
+	closedShapePolyline.close();
+	
+And finally, we can then draw our polylines in the `draw` function:
+
+	ofBackground(0);
+	ofSetLineWidth(2.0);
+	ofSetColor(255,100,0);
+	straightSegmentPolyline.draw();
+	curvedSegmentPolyline.draw();
+	closedShapePolyline.draw();
+
+So what did we do here?  We created three different types of polylines.  
+
+For the first one, `straightSegmentPolyline`, we used the [`addVertex`](http://www.openframeworks.cc/documentation/graphics/ofPolyline.html#show_addVertex "addVertex Documentation Page") function.  This allows us to add points that will be connected with a series of straight lines.  You can pass an `ofVec2f` (or `ofVec3f`) to `addVertex`, or you can pass in x and y (and an optional z) into the function in that order.  
+
+For the second one, `curvedSegmentPolyline` we use the same points, but we connect up the points with curved lines using ['curveTo'](http://www.openframeworks.cc/documentation/graphics/ofPolyline.html#show_curveTo "curveTo Function Documentation Page"].  `curveTo` accepts the same types of inputs as `addVertex`.  Notice that we had to add the first vertex and last vertex twice.  The `curveTo` function, like its name suggests, curves from the last vertex to the vertex that you pass in.  **[note: explain why you need a first duplicate AND a last duplicate]**  
+
+For the final one, `closedShapePolyline`, we used straight line segments again, but we use the [`close`](http://www.openframeworks.cc/documentation/graphics/ofPolyline.html#show_close "close Function Documentation Page") function to connect our last vertex to our first vertex.  **[note: explain why you would want to close a polyline]**  
+
+After you created those polylines in `setup`, then you were able to draw them using the polyline's [`draw`](http://www.openframeworks.cc/documentation/graphics/ofPolyline.html#show_draw "draw Function Documentation Page") function to display them to the screen.  (Note that `ofSetLineWidth` works to adjust the thickness of polylines.)  And you ended up with something that looked like this:
+
+![Polyline Examples](images/intrographics_polylineexamples.png "Using basic polylines")
 
 
 
