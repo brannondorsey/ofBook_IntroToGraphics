@@ -545,9 +545,9 @@ How about we add some color?  I won't get offended if you'd rather use your own 
 
 ![Triangle Brush Final](images/intrographics_trianglebrushfinal.png "Results of using the final triangle brush")	
 
-And once again, you can play with fill and line width if you like.
+And once again, you can play with turning off fill and changing line width if you like.
 
-And now that you are a master of rectangles, circles, ellipses, lines and triangles, you can make other brushes that strike your fancy. 
+But now you are a master of rectangles, circles, ellipses, lines and triangles, you can make other brushes that strike your fancy.  (Or you can go off and make something other than a brush.)  In the next section, we'll hop into freeform shapes and how you can use those to create paths out of your digital brush strokes.
 
 **Go back and add subheaders for each brush to better break up the sections and then title them with the concepts that will be introduced (and add that to the outline)**
 
