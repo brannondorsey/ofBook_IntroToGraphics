@@ -682,8 +682,28 @@ In `update`, instead of `currentPolyline.addVertex(mousePos);`, use `currentPoly
 
 And lastly, in `mouseReleased`, add `currentPolyline.curveTo(x, y);` inside your if statement.  This provides our necessary duplicate of our last point.
 
-Your lines should be slightly more attractive (or in the case of my awful mouse control, much more attractive).  Now you've got a basic polyline drawing program, but you don't have the ability to draw multiple polylines.  For that, we will turn to [`ofPath`](http://openframeworks.cc/documentation/graphics/ofPath.html "ofPath Documentation Page").  
+Your lines should be slightly more attractive (or in the case of my awful mouse control, much more attractive).  Now you've got a basic polyline drawing program, but you don't have the ability to draw multiple polylines.  For that, we will turn to something called a `vector`.  
 
+This isn't the same kind of vector that we talked about earlier in the context of `of2Vecf`. **[Note: need to explain vector]**
+
+So we can use a `vector <ofPolylines>` to save our polyline brush strokes.  When we finish a stroke, we want to add the polyline to our vector.  So in the if statement inside of `mouseReleased`, let's add:
+
+	polylines.push_back(currentPolyline);
+
+Then we can draw our saved polylines in a different color than our current polyline.  So your `draw` function should look like this:
+
+	ofBackground(0);
+	ofSetLineWidth(2);
+	
+	ofSetColor(255);
+	for (int i=0; i<polylines.size(); ++i) {
+		ofPolyline polyline = polylines[i];
+		polyline.draw();
+	}
+	
+	
+	ofSetColor(255,100,0);
+	currentPolyline.draw();
 
 
 
