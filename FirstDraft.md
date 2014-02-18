@@ -9,8 +9,8 @@ I'm aiming to make sure we don't lose any beginners, so I realize that this chap
 	- 1.1 [Predefined Shapes](#11-predefined-shapes)
 		-  1.1a [Drawing to the screen!](#11a-drawing-to-the-screen)
 		-  1.1b [Drawing to the screen! The fun bits.](#11b-drawing-to-the-screen-the-fun-bits)
-	- 1.2 Freeform Shapes
-		-  1.2a Drawing to the screen, again!
+	- 1.2 [Freeform Shapes](#12-freeform-shapes)
+		-  1.2a [Hello Path](#12a-hello-path)
 		-  1.2b The fun bits, again!
 - 2. Moving Coordinate System
 - 3. Recursion
@@ -563,7 +563,7 @@ Why does any of that matter?  We are moving into the territory of vector graphic
 
 #### 1.2a Hello Path ####
 
-Create a new project and call it something like PathBrush.  Say hello to [`ofPolyline'](http://www.openframeworks.cc/documentation/graphics/ofPolyline.html "ofPolyline Documentation Page"], who is about to become our buddy.  What's an ofPolyline?  It is a data structure that allows you to store a series of sequential points and then draw them to create a line or shape.  Like with `ofColor` and `ofVec2f`, `ofPolyline` gives you a bunch of handy helper functions to make life easier.
+Create a new project and call it something like PathBrush.  Say hello to [`ofPolyline'](http://www.openframeworks.cc/documentation/graphics/ofPolyline.html "ofPolyline Documentation Page"), who is about to become our buddy.  What's an ofPolyline?  It is a data structure that allows you to store a series of sequential points and then draw them to create a line or shape.  Like with `ofColor` and `ofVec2f`, `ofPolyline` gives you a bunch of handy helper functions to make life easier.
 
 How about we get acquainted with ofPolyline in the context of some code?  Let's define three `ofPolylines` in the header file (.h):
 
