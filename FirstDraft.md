@@ -105,7 +105,7 @@ Okay, so you've got the recipes for some basic shapes down.  Before we start put
 **[Note: Include something about RGB colors]**
 
 
-#### 1.1b Drawing to the screen! The fun bits. ####
+#### 1.1b Drawing to the screen! (But now the fun bits.) ####
 
 You surivived the boring bits!
 
