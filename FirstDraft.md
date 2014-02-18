@@ -710,5 +710,20 @@ And you can draw a doopy smiley face:
 
 ![Polyline Smile](images/intrographics_polylinesmile.png "Using a polyline pen to draw a smile")
 
+**[Note: could add a description of how to implement a delete/undo feature]**
+
+Now that we have the basic drawing in place, why don't we play with how we are rendering our polylines to the screen?  
+
+First, let's draw circles where the points in our polylines are.  Inside of the for loop in your `draw` function (after `polyline.draw();`, add this:
+
+	vector<ofVec3f> vertices = polyline.getVertices();
+	for (int vertexIndex=0; vertexIndex<vertices.size(); ++vertexIndex) {
+		ofVec3f vertex = vertices[vertexIndex];
+		ofCircle(vertex, 5);
+	}
+	
+**[Note: explain vector<ofVec3f>, getVertices, vertices.size()]**
+
+What happens when you run it?  Your white lines just look thicker?  That's because our polyline is jam-packed with vertices!  Every time we call the `curveTo` function, we create 20 extra vertices (by default).  These are needed to make a smooth-looking curve.  You can adjust how many vertices are added with an optional, additional parameter that you pass to `curveTo` (check out the [documentation page](http://openframeworks.cc/documentation/graphics/ofPolyline.html#show_curveTo "curveTo Documentation Page")).
 
 
