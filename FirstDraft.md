@@ -641,19 +641,21 @@ We've got our variables set up, so now we can start dealing with the mouse butto
 
 	if (button == OF_MOUSE_BUTTON_LEFT) {
 		leftMouseButtonPressed = true;
-		currentPolyline.clear();	
 		currentPolyline.addVertex(x, y);
 		lastPoint.set(x, y);
 	}
 	
-When the left mouse button is pressed, we update our variables.  Remember that the variables `x` and `y` in the `mousePressed` and `mouseReleased` functions give us the position of the mouse when a button is pressed/released.  We haven't talked about the polyline [`clear`](http://www.openframeworks.cc/documentation/graphics/ofPolyline.html#show_clear "clear Documentation Page") function yet, but it does was you might expect - remove all the points that are stored in the polyline.  This way we can start a new brush stroke with each click of the mouse.  
+When the left mouse button is pressed, we update our variables.  Remember that the variables `x` and `y` in the `mousePressed` and `mouseReleased` functions give us the position of the mouse when a button is pressed/released.  
 
 Our `mouseReleased` function will be quite simple for the moment:
 
 	if (button == OF_MOUSE_BUTTON_LEFT) {
 		leftMouseButtonPressed = false;
+		currentPolyline.clear();	
 	}
     
+We haven't talked about the polyline [`clear`](http://www.openframeworks.cc/documentation/graphics/ofPolyline.html#show_clear "clear Documentation Page") function yet, but it does was you might expect - remove all the points that are stored in the polyline.  This way we can start a new brush stroke with each click of the mouse.  
+
 Great, we've set up our variables and handled mouse button pressed, so here's the workhourse code that will go into the `update` function:
 
 	if (leftMouseButtonPressed) {
@@ -682,7 +684,7 @@ In `update`, instead of `currentPolyline.addVertex(mousePos);`, use `currentPoly
 
 And lastly, in `mouseReleased`, add `currentPolyline.curveTo(x, y);` inside your if statement.  This provides our necessary duplicate of our last point.
 
-Your lines should be slightly more attractive (or in the case of my awful mouse control, much more attractive).  Now you've got a basic polyline drawing program, but you don't have the ability to draw multiple polylines.  For that, we will turn to something called a `vector`.  
+Your lines should be slightly more attractive (or in the case of my awful mouse control, much more attractive).  Now you've got a basic polyline drawing program, but you don't have the ability to save your polylines.  For that, we will turn to something called a `vector`.  
 
 This isn't the same kind of vector that we talked about earlier in the context of `of2Vecf`. **[Note: need to explain vector]**
 
@@ -701,9 +703,12 @@ Then we can draw our saved polylines in a different color than our current polyl
 		polyline.draw();
 	}
 	
-	
 	ofSetColor(255,100,0);
 	currentPolyline.draw();
+	
+And you can draw a doopy smiley face:
+
+![Polyline Smile](images/intrographics_polylinesmile.png "Using a polyline pen to draw a smile")
 
 
 
