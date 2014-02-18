@@ -8,7 +8,8 @@ I'm aiming to make sure we don't lose any beginners, so I realize that this chap
 - 1. [Drawing Shapes. Then Drawing Many, Many, Many Shapes](#1-drawing-shapes--then-drawing-many-many-many-shapes)
 	- 1.1 [Predefined Shapes](#11-predefined-shapes)
 		-  1.1a [Drawing to the screen!](#11a-drawing-to-the-screen)
-		-  1.1b [Drawing to the screen! The fun bits.](#11b-drawing-to-the-screen-the-fun-bits)
+		-  1.1b [Drawing to the screen! (But now the fun bits.)](#11b-drawing-to-the-screen-but-now-the-fun-bits)
+			- Topics covered: rectangles, circles, ellipses, lines, triangles, mouse position, mouse clicks, keyboard input, randomness, RGB colors, linear interpolation, polar coordinates, ofVec2f  
 	- 1.2 [Freeform Shapes](#12-freeform-shapes)
 		-  1.2a [Hello Polyline](#12a-polyline)
 		-  1.2b [Polyline Brushes](#12b-polyline-brushes)
