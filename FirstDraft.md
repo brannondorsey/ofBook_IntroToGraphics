@@ -741,4 +741,10 @@ And now you have evenly spaced points:
 
 ![Polyline Sampled Points](images/intrographics_polylinesampledpoints.png "Drawing circles at sampled points along a polyline")
 
+Additional extensions to write up:
+- Drawing normal lines
+- Drawing tangents lines
+- Drawing normal shape
+- Something fun to cap off all of the concepts
+
 
