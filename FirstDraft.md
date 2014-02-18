@@ -15,8 +15,8 @@ I'm aiming to make sure we don't lose any beginners, so I realize that this chap
 		-  1.2a [Hello Polyline](#12a-hello-polyline)
 			- addVertex, curveTo, close  
 		-  1.2b [Polyline Brushes](#12b-polyline-brushes)
-- 2. Moving Coordinate System
-- 3. Recursion
+- 2. Moving Coordinate System - described in outline.md
+- 3. Recursion Generative Color Compositions - described in outline.md
 
 ## 1. Drawing Shapes.  Then Drawing Many, Many, Many Shapes ##
 
