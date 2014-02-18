@@ -619,8 +619,56 @@ After you created those polylines in `setup`, then you were able to draw them us
 
 So the advantage of drawing paths and shapes in this way (versus what we did in the last section) is that those polyline objects are stored and are modifiable.  We could move our vertices around on the fly.  We could add or delete vertices on the fly.  **[note: maybe put a little more effort to explain the power]** 
 
-
 #### 1.2b Polyline Brushes ####
+
+Let's start using polylines to track brush "strokes."  When the left mouse button is held down, we will keep track of the mouse positions and add them to a polyline.  
+
+How should we go about that?  We are going to need a boolean to tell us whether the left mouse button is being held down.  If it is being held down, then we need to get the mouse position every frame.  It would be tempting to just add all of those mouse positions to a polyline, but that could cause some problems.  If we were to just hold the left mouse button down without moving the mouse, we would add a duplicate point to our polyline on every frame.  That could potentially add up to cause slowdowns or crashing, so it is best to plan ahead.  Instead of adding *every* mouse position, let's just add the mouse positions where the mouse has moved a sufficient distance away from the last point in our polyline.  
+
+We've got some idea of what we are going to do, so on to the code.  Put these lines into the header file (.h):
+
+	ofPolyline currentPolyline;
+	bool currentlyAddingPoints;
+	ofVec2f lastPoint;
+	float minDistance;
+	
+And put these lines into the `setup` function of the source file (.cpp):
+
+	minDistance = 10;
+	currentlyAddingPoints = false;
+	
+We've got our variables set up, so now we can start dealing with the mouse button presses in the `mousePressed` function:
+
+	if (button == OF_MOUSE_BUTTON_LEFT) {
+		currentlyAddingPoints = true;
+		currentPolyline.clear();	
+		currentPolyline.addVertex(x, y);
+		lastPoint.set(x, y);
+	}
+	
+When the left mouse button is pressed, we update our variables.  Remember that the variables `x` and `y` in the `mousePressed` and `mouseReleased` functions give us the position of the mouse when a button is pressed/released.  We haven't talked about the polyline [`clear`](http://www.openframeworks.cc/documentation/graphics/ofPolyline.html#show_clear "clear Documentation Page") function yet, but it does was you might expect - remove all the points that are stored in the polyline.  This way we can start a new brush stroke with each click of the mouse.  
+
+Our `mouseReleased` function will be quite simple for the moment:
+
+	if (button == OF_MOUSE_BUTTON_LEFT) {
+		currentlyAddingPoints = false;
+	}
+    
+Great, we've set up our variables and handled mouse button pressed, so here's the workhourse code that will go into the `update` function:
+
+	if (currentlyAddingPoints) {
+		ofVec2f mousePos(mouseX, mouseY);
+		if (lastPoint.distance(mousePos) >= minDistance) {
+			currentPolyline.addVertex(mousePos);
+			lastPoint = mousePos;
+		}
+	}
+
+This code handles adding the mouse position to the polyline (and only does so when the mouse has moved a certain threshold amount away from the last point we added to the polyline).  Last thing to do is draw our polyline in the `draw` function:
+
+	ofBackground(0);    
+	ofSetColor(255,100,0);
+	currentPolyline.draw();
 
 
 
