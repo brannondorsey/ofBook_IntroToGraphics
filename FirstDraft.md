@@ -640,7 +640,7 @@ And put these lines into the `setup` function of the source file (.cpp):
 We've got our variables set up, so now we can start dealing with the mouse button presses in the `mousePressed` function:
 
 	if (button == OF_MOUSE_BUTTON_LEFT) {
-		currentlyAddingPoints = true;
+		leftMouseButtonPressed = true;
 		currentPolyline.clear();	
 		currentPolyline.addVertex(x, y);
 		lastPoint.set(x, y);
@@ -651,12 +651,12 @@ When the left mouse button is pressed, we update our variables.  Remember that t
 Our `mouseReleased` function will be quite simple for the moment:
 
 	if (button == OF_MOUSE_BUTTON_LEFT) {
-		currentlyAddingPoints = false;
+		leftMouseButtonPressed = false;
 	}
     
 Great, we've set up our variables and handled mouse button pressed, so here's the workhourse code that will go into the `update` function:
 
-	if (currentlyAddingPoints) {
+	if (leftMouseButtonPressed) {
 		ofVec2f mousePos(mouseX, mouseY);
 		if (lastPoint.distance(mousePos) >= minDistance) {
 			currentPolyline.addVertex(mousePos);
@@ -667,8 +667,23 @@ Great, we've set up our variables and handled mouse button pressed, so here's th
 This code handles adding the mouse position to the polyline (and only does so when the mouse has moved a certain threshold amount away from the last point we added to the polyline).  Last thing to do is draw our polyline in the `draw` function:
 
 	ofBackground(0);    
+	ofSetLineWidth(2);
 	ofSetColor(255,100,0);
 	currentPolyline.draw();
+
+So you have a super basic pen.  Hooray?  Maybe it is a little too blocky for your tastes?  The polyline is made up of straight line segments at the moment...so let's change that by using `curveTo`.
+
+In `mousePressed`, instead of `currentPolyline.addVertex(x, y);`, try:
+	
+	currentPolyline.curveTo(x, y); // Necessary duplicate for first point when using curveTo
+	currentPolyline.curveTo(x, y);
+	
+In `update`, instead of `currentPolyline.addVertex(mousePos);`, use `currentPolyline.curveTo(mousePos);`.
+
+And lastly, in `mouseReleased`, add `currentPolyline.curveTo(x, y);` inside your if statement.  This provides our necessary duplicate of our last point.
+
+Your lines should be slightly more attractive (or in the case of my awful mouse control, much more attractive).  Now you've got a basic polyline drawing program, but you don't have the ability to draw multiple polylines.  For that, we will turn to [`ofPath`](http://openframeworks.cc/documentation/graphics/ofPath.html "ofPath Documentation Page").  
+
 
 
 
