@@ -724,6 +724,13 @@ First, let's draw circles where the points in our polylines are.  Inside of the 
 	
 **[Note: explain vector<ofVec3f>, getVertices, vertices.size()]**
 
-What happens when you run it?  Your white lines just look thicker?  That's because our polyline is jam-packed with vertices!  Every time we call the `curveTo` function, we create 20 extra vertices (by default).  These are needed to make a smooth-looking curve.  You can adjust how many vertices are added with an optional, additional parameter that you pass to `curveTo` (check out the [documentation page](http://openframeworks.cc/documentation/graphics/ofPolyline.html#show_curveTo "curveTo Documentation Page")).
+What happens when you run it?  Your white lines just look thicker?  That's because our polyline is jam-packed with vertices!  Every time we call the `curveTo` function, we create 20 extra vertices (by default).  These are needed to make a smooth-looking curve.  You can adjust how many vertices are added with an optional parameter (`curveResolution`) that you pass to `curveTo` (check out the [documentation page](http://openframeworks.cc/documentation/graphics/ofPolyline.html#show_curveTo "curveTo Documentation Page")).  We don't need quite that many vertices on our polylines, but instead of lowering the `curveResolution`, we can make use of another polyline function called [`simplify`](http://openframeworks.cc/documentation/graphics/ofPolyline.html#show_simplify "simplify Documentation Page").
+
+`simplify` is a function that will remove 'duplicate' points from your polyline.  You pass a single argument into it: `tolerance`, a value between 0.0 and 1.0.  The `tolerance` describes how dis-similar points must be in order to be considered 'unique' enough to not be deleted.  The higher the tolerance, the more points that will be removed.  So right before we save our polyline by putting it into our `polylines` vector, we will simplify it to reduce the number of vertices.  Inside of the if statment within `mouseReleased` (before `polylines.push_back(currentPolyline);`), add: `currentPolyline.simplify(0.75);`.
+
+![Polyline Vertices](images/intrographics_polylinevertices.png "Drawing circles at the vertices of a polyline")
+
+
+
 
 
