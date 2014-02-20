@@ -112,7 +112,7 @@ Okay, so you've got the recipes for some basic shapes down.  Before we start put
 
 You surivived the boring bits!
 
-Well, the necessary bits.  Why draw a single rectangle, when you can draw a bagillion?
+Well, the necessary bits.  Why draw a single rectangle, when you can draw a millions?  (Okay, not a million - but at least enough that you wouldn't bother counting.)
 
 ![Many Rectangles](images/intrographics_lotsofrectangles.png "Drawing lots and lots of rectangles")
 
