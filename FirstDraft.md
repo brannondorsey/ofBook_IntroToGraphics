@@ -732,7 +732,7 @@ What happens when you run it?  Your white lines just look thicker?  That's becau
 
 We can also sample points along the polyline using [`getPointAtPercent`](http://openframeworks.cc/documentation/graphics/ofPolyline.html#show_getPointAtPercent "getPointAtPercent Documentation Page").  **[Note: explain the function]**.  Inside the `draw` function, comment out the code that draws a circle at each vertex.  Below that, add: 
 
-        for (int p=0; p<=100; p+=10) {
+        for (int p=0; p<100; p+=10) {
             ofVec3f point = polyline.getPointAtPercent(p/100.0);
             ofCircle(point, 5);
         }
@@ -740,6 +740,36 @@ We can also sample points along the polyline using [`getPointAtPercent`](http://
 And now you have evenly spaced points:
 
 ![Polyline Sampled Points](images/intrographics_polylinesampledpoints.png "Drawing circles at sampled points along a polyline")
+
+So we have a line, and we can get a point along that line anywhere we want.  We can start transforming that line into whatever we want.  Maybe you want to create a brush stroke where the thickness of the line changes?  I hope so, because that's what we are going to do.  
+
+To do this, we need to talk about something called a [normal vector](http://en.wikipedia.org/wiki/Normal_(geometry) "Wiki on normal vectors in geometry").  You might remember those words from the echos of a memory of high school math, or you migth remember another word, [perpendicular](http://en.wikipedia.org/wiki/Perpendicular "Wiki on perpendicular lines").  If we have start with one line, the normal vector points in the opposite direction.  If you draw the normal vector onto our original line, they will be perpendicular, forming a cross.  (Mathematically, we are talking about two lines that intersect and form right angles with each other.)  
+
+**[Note: quick pick would be enough to help cut down on the words here]**
+
+Why do we care about normals?  Well, imagine you were have a straight, horizontal `ofPolyline` line that you just drew, and you want to make it thicker.  You could walk along every pixel of your line, and at each pixel, color in the pixels that are directly above or below you.  What you are doing is coloring in the pixels that are perpendicular to your line, the normal vectors.  Well, `ofPolyline` will let us do just that in our code.   
+
+**[Note: work on better explanation]**
+
+You can comment out (or delete) your lines of code that draw circles in your `draw` function, and below that, add these lines of code: 
+
+	float numPoints = polyline.size();
+	for (int p=0; p<100; p+=10) {
+		ofVec3f point = polyline.getPointAtPercent(p/100.0);
+		float floatIndex = p/100.0 * (numPoints-1);
+		float normalLength = 50;
+		ofVec3f normal = polyline.getNormalAtIndexInterpolated(floatIndex) * normalLength;
+		ofSetLineWidth(1);
+		ofLine(point, point+normal);
+	}
+	
+
+
+**openFrameworks Bug and Weirdness:**
+Setting alpha to 1 causes the hue information on a color to shift when drawing overlapping shapes (need to verify this happens outside of the brush app)
+`polyline.getPointAtPercent(0)` and `polyline.getPointAtPercent(1.0)` return the same thing
+
+
 
 Additional extensions to write up:
 - Drawing normal lines
