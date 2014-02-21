@@ -822,6 +822,9 @@ I'm sure you can guess what's next... drawing a whole bunch of tangents at evenl
 
 That was worth the aside, right?  (I'm sorry.  Desperately trying to avoid a tangent pun.)  Back to the normals we were working with, eh?   
 
+It doesn't seem terribly efficient to add thickness to our lines by drawing lots and lots of normals using `ofLine`.
+
+Comment out your draw poly line
 
 **openFrameworks Bug and Weirdness:**
 - Setting alpha to 1 causes the hue information on a color to shift when drawing overlapping shapes (need to verify this happens outside of the brush app)
