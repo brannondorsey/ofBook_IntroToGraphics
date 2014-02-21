@@ -940,21 +940,30 @@ What if, after figuring out the coordinates for all your shapes, you decided tha
 	}
 
 
-So we have just taken our original cricle and rectangle code and wrapped it in a loop which ends with `ofTranslate(150, 0)` which shifts our graph paper (coordinate system) to the left 150 pixels each time it executes.  
+So we have just taken our original cricle and rectangle code and wrapped it in a loop which ends with `ofTranslate(150, 0)` which shifts our graph paper (coordinate system) to the left 150 pixels each time it executes.  And you'll end up with something like this:
 
 ![Family Row](images/intrographics_coordinatesystemfamilyrow.png "A row of stick figure families")
 
+Or almost like that.  I added a tweak to randomize the colors of the people - every family is different, right?  If you wanted to create a whole grid of you'll want to start using [`ofPushMatrix`](http://www.openframeworks.cc/documentation/graphics/ofGraphics.html#show_ofPushMatrix "ofPushMatrix Documentation Page") and [`ofPopMatrix`](http://www.openframeworks.cc/documentation/graphics/ofGraphics.html#show_ofPopMatrix "ofPopMatrix Documentation Page").
 
 
-Repeating a shape with translate
-Drawing a rotated rectangle
+        for (int rows=0; rows<10; rows++) {
+            ofPushMatrix();
+            for (int cols=0; cols<10; cols++) {
+
+                // Code omitted for clarity ...
+                
+                ofTranslate(150, 0);
+            }
+            ofPopMatrix();
+            ofTranslate(0, 200);
+        }
+
+**[Note: explain of push/pop sooner than this]**
 
 
 
-ofSetFrameRate(60);
-ofEnableAlphaBlending();
-ofSetBackgroundAuto(false);
-ofBackground(0);
+
 
 ## 3. See outline ##
 
