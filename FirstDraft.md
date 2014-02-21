@@ -15,7 +15,7 @@ I'm aiming to make sure we don't lose any beginners, so I realize that this chap
 		-  1.2a [Hello Polyline](#12a-hello-polyline)
 			- addVertex, curveTo, close  
 		-  1.2b [Polyline Brushes](#12b-polyline-brushes)
-- 2. Moving Coordinate System - described in outline.md
+- 2. [Moving The World](#2-moving-the-world)
 - 3. Recursion Generative Color Compositions - described in outline.md
 
 ## 1. Drawing Shapes.  Then Drawing Many, Many, Many Shapes ##
@@ -873,7 +873,7 @@ Before running, I would recommend commenting out your `polyline.draw();` line of
 
 **[Note: another test graphic, redo later using polygons and make animated]**
 
-## 2. See outline ##
+## 2. Moving The World ##
 
 ## 3. See outline ##
 
