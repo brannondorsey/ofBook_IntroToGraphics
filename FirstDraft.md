@@ -886,6 +886,36 @@ For a physical analogy, imagine that you have a piece of graphing paper in front
 
 **[Note: explain why ofBackground can't be used with transparency]**
 
+So let's tackle [`ofTranslate`](http://www.openframeworks.cc/documentation/graphics/ofGraphics.html#show_ofTranslate "ofTranslate Documentation Page") first.  `ofTranslate` takes an x, a y and an optional z parameter, and then shifts the coordinate system by those specified values.  Why would you ever want to shift the coordinate system like this?  Imagine that you wrote some code to draw a little stick figure family:
+
+
+	ofBackground(255);
+	
+        ofColor purpleColor(231, 49, 247, 200);
+	
+	ofSetColor(purpleColor);
+	ofCircle(30, 30, 30);
+	ofRect(5, 70, 50, 100);
+	
+	ofSetColor(purpleColor);
+	ofCircle(95, 30, 30);
+	ofRect(70, 70, 50, 100);
+	
+	ofSetColor(purpleColor);
+	ofCircle(45, 90, 15);
+	ofRect(30, 110, 30, 60);
+	
+	ofSetColor(purpleColor);
+	ofCircle(80, 90, 15);
+	ofRect(65, 110, 30, 60);
+
+And you end up with something like this:
+
+![Monochromatic Family](images/intrographics_coordinatesystemfamily.png "A little monochromatic stick figure family")
+
+What if, after figuring out the coordinates for all your shapes, you decided that you wanted to draw that family at a different spot on the screen, or you decided that you wanted to clone the family and draw copies all over your screen?  You *could* change all the positions of the shapes you are drawing, or you could just use `ofTranslate` to move your coordinate system.
+
+
 Repeating a shape with translate
 Drawing a rotated rectangle
 
