@@ -360,7 +360,7 @@ There's another way we can use `ofSetColor` that is useful.  Meet [`ofColor`](ht
 	yellow.g = 255;
 	yellow.a = 255;
 
-Now, let's say that instead of just using an orange or a red color for our circle brush, what if we wanted to pick a random color in-between orange and red?  `ofColor` has a solution for using what is called [linear interpolation](http://en.wikipedia.org/wiki/Linear_interpolation "Wiki for Linear Interpolation"].  Replace your `ofSetColor` line of code with these four lines of code: 
+Now, let's say that instead of just using an orange or a red color for our circle brush, what if we wanted to pick a random color in-between orange and red?  `ofColor` has a solution for using what is called [linear interpolation](http://en.wikipedia.org/wiki/Linear_interpolation "Wiki for Linear Interpolation").  Replace your `ofSetColor` line of code with these four lines of code: 
 
 **[Note: explain lerp for the math averse and explain the syntax]**
 
