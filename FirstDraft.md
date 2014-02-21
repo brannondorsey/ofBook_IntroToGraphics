@@ -16,6 +16,7 @@ I'm aiming to make sure we don't lose any beginners, so I realize that this chap
 			- addVertex, curveTo, close  
 		-  1.2b [Polyline Brushes](#12b-polyline-brushes)
 - 2. [Moving The World](#2-moving-the-world)
+	- translate, rotate, scale, push, pop, noise, parameterization, creating a gif
 - 3. Recursion Generative Color Compositions - described in outline.md
 
 ## 1. Drawing Shapes.  Then Drawing Many, Many, Many Shapes ##
@@ -874,6 +875,21 @@ Before running, I would recommend commenting out your `polyline.draw();` line of
 **[Note: another test graphic, redo later using polygons and make animated]**
 
 ## 2. Moving The World ##
+
+Jeeze.  We've been making brushes for a long time.  Let's take a break from that and create a smaller project that will help demonstrate how you can move the world.  And by move the world, I really just mean move the coordinate system (though it sounds more exciting the other way).
+
+Whenever we called a drawing function, like `ofRect` for example, we passed in an `x` and `y` location at which we wanted our shape to be drawn.  We knew (0,0) to be the upper left pixel of our window, that the positive x direction was rightward across our window and that positive y direction was downward along our window.  We are about to violate that established knowledge.  
+
+For a physical analogy, imagine that you have a piece of graphing paper in front of you (or go ahead and grab one).  Those squares are the pixels of your screen.  If I ask you to draw a black rectangle at (5, 10) that is 5 pixels wide and 2 pixels high, what would you do?  Probably grab a black pen and move your hand over to the location (5, 10) on your graphing paper and start filling in pixels?  Good, that seems normal.  But you could have also have kept your pen hand stationary, moved your paper 5 pixels left and 10 pixels down and then started filling in pixels.  In openFrameworks, we can move our coordinate system like this using `ofTranslate`, but we can also rotate or scale the coordinate system with `ofRotate` and `ofScale`.  Seems odd to do that right?  
+
+**[Note: this section needs pictures]**
+
+
+
+ofSetFrameRate(60);
+ofEnableAlphaBlending();
+ofSetBackgroundAuto(false);
+ofBackground(0);
 
 ## 3. See outline ##
 
