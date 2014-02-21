@@ -944,20 +944,32 @@ So we have just taken our original cricle and rectangle code and wrapped it in a
 
 ![Family Row](images/intrographics_coordinatesystemfamilyrow.png "A row of stick figure families")
 
-Or almost like that.  I added a tweak to randomize the colors of the people - every family is different, right?  If you wanted to create a whole grid of you'll want to start using [`ofPushMatrix`](http://www.openframeworks.cc/documentation/graphics/ofGraphics.html#show_ofPushMatrix "ofPushMatrix Documentation Page") and [`ofPopMatrix`](http://www.openframeworks.cc/documentation/graphics/ofGraphics.html#show_ofPopMatrix "ofPopMatrix Documentation Page").
+Or almost like that.  I added a tweak to randomize the colors of the people - every family is different, right?  If you wanted to create a whole grid of families, you will run into problems.  After the first row of families, your coordinate system will have been moved quite far to the left.  If you move your coordinate system up in order to start drawing your second row, you will end up drawing off the screen.  It would look something like this:
 
+![Family Improper Grid](images/intrographics_coordinatesystemfamilywithoutsaving.png "Drawing the families without reseting the coordinate system")
+
+So what we need is some way to reset the coordinate system.  You'll want to start using [`ofPushMatrix`](http://www.openframeworks.cc/documentation/graphics/ofGraphics.html#show_ofPushMatrix "ofPushMatrix Documentation Page") and [`ofPopMatrix`](http://www.openframeworks.cc/documentation/graphics/ofGraphics.html#show_ofPopMatrix "ofPopMatrix Documentation Page").
+
+`ofPushMatrix` saves the current coordinate system and `ofPopMatrix` returns you to the last saved coordinate system.  The reason why they have these functions have the word matrix in them is because of what is happening behind the scenes in openFrameworks.  You start with an un- rotated, un-translated, and un-scaled coordinate system that you used in section 1 of this chapter, which we will call the unmodified coordinate system.  When you start using `ofTranslate`, `ofRotate` and `ofScale`, the rotation, translation and scaling are all stored in a single transformation matrix, which represents the modified coordinate system.  Let's say you have a point (x, y, z) in the unmodifed coordinate system, if you multiple it by the transformation matrix, you end up with a new point (x', y', z') that is in modified coordinate system.  The math chapter *[note: point to math chapter]** will go into more depth on this.  I just want to make sure that the word matrix in `ofPushMatrix` and `ofPopMatrix` has some context.  If you want, you can just think of it as ofSaveCoordinateSystem and ofReturnToLastSavedCoordinateSystem.
+
+So we can use these new functions like this:
 
         for (int rows=0; rows<10; rows++) {
-            ofPushMatrix();
+            ofPushMatrix(); // Save the coordinate system before you shift it horizontally
             for (int cols=0; cols<10; cols++) {
 
                 // Code omitted for clarity ...
                 
                 ofTranslate(150, 0);
             }
-            ofPopMatrix();
+            ofPopMatrix(); // Return to the coordinate system before you shifted it horizontally
             ofTranslate(0, 200);
         }
+
+And you should end up with a grid.  I've skipped ahead and used `ofScale`, but you should end up with a nice grid like this:
+
+![Family Proper Grid](images/intrographics_coordinatesystemfamilywithsaving.png "Drawing the families with proper reseting of the coordinate system")
+
 
 **[Note: explain of push/pop sooner than this]**
 
