@@ -880,10 +880,11 @@ Jeeze.  We've been making brushes for a long time.  Let's take a break from that
 
 Whenever we called a drawing function, like `ofRect` for example, we passed in an `x` and `y` location at which we wanted our shape to be drawn.  We knew (0,0) to be the upper left pixel of our window, that the positive x direction was rightward across our window and that positive y direction was downward along our window.  We are about to violate that established knowledge.  
 
-For a physical analogy, imagine that you have a piece of graphing paper in front of you (or go ahead and grab one).  Those squares are the pixels of your screen.  If I ask you to draw a black rectangle at (5, 10) that is 5 pixels wide and 2 pixels high, what would you do?  Probably grab a black pen and move your hand over to the location (5, 10) on your graphing paper and start filling in pixels?  Good, that seems normal.  But you could have also have kept your pen hand stationary, moved your paper 5 pixels left and 10 pixels down and then started filling in pixels.  In openFrameworks, we can move our coordinate system like this using `ofTranslate`, but we can also rotate or scale the coordinate system with `ofRotate` and `ofScale`.  Seems odd to do that right?  
+**[Note: this section needs pictures to go along with the analogy]**
 
-**[Note: this section needs pictures]**
+For a physical analogy, imagine that you have a piece of graphing paper in front of you (or go ahead and grab one).  Those squares are the pixels of your screen.  If I ask you to draw a black rectangle at (5, 10) that is 5 pixels wide and 2 pixels high, what would you do?  Probably grab a black pen and move your hand over to the location (5, 10) on your graphing paper and start filling in pixels?  Good, that seems normal.  But you could have also have kept your pen hand stationary, moved your paper 5 pixels left and 10 pixels down and then started filling in pixels.  That initially seems like an odd thing to do right?  It turns out that it is a powerful thing to do in code.  With openFrameworks, we can move our coordinate system like this using `ofTranslate`, but we can also rotate or scale the coordinate system with `ofRotate` and `ofScale`.  
 
+**[Note: explain why ofBackground can't be used with transparency]**
 
 
 ofSetFrameRate(60);
