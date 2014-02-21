@@ -913,7 +913,37 @@ And you end up with something like this:
 
 ![Monochromatic Family](images/intrographics_coordinatesystemfamily.png "A little monochromatic stick figure family")
 
-What if, after figuring out the coordinates for all your shapes, you decided that you wanted to draw that family at a different spot on the screen, or you decided that you wanted to clone the family and draw copies all over your screen?  You *could* change all the positions of the shapes you are drawing, or you could just use `ofTranslate` to move your coordinate system.
+What if, after figuring out the coordinates for all your shapes, you decided that you wanted to draw that family at a different spot on the screen, or you decided that you wanted to clone the family and draw a row of them?  You *could* change all the positions of the shapes you are drawing, or you could just use `ofTranslate` to move your coordinate system and leave the positions as they are:
+
+	ofBackground(255);
+	ofColor purpleColor(231, 49, 247, 200);
+        
+	for (int cols=0; cols<10; cols++) {
+	
+		ofSetColor(purpleColor);
+		ofCircle(30, 30, 30);
+		ofRect(5, 70, 50, 100);
+		
+		ofSetColor(purpleColor);
+		ofCircle(95, 30, 30);
+		ofRect(70, 70, 50, 100);
+		
+		ofSetColor(purpleColor);
+		ofCircle(45, 90, 15);
+		ofRect(30, 110, 30, 60);
+		
+		ofSetColor(purpleColor);
+		ofCircle(80, 90, 15);
+		ofRect(65, 110, 30, 60);
+        
+		ofTranslate(150, 0);
+	}
+
+
+So we have just taken our original cricle and rectangle code and wrapped it in a loop which ends with `ofTranslate(150, 0)` which shifts our graph paper (coordinate system) to the left 150 pixels each time it executes.  
+
+![Family Row](images/intrographics_coordinatesystemfamilyrow.png "A row of stick figure families")
+
 
 
 Repeating a shape with translate
