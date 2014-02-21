@@ -761,17 +761,35 @@ You can comment out (or delete) your lines of code that draw circles in your `dr
             ofLine(vertex-normal/2, vertex+normal/2);
         }
         
-Like with the first time we drew circles, we getting the all of the vertices in our `ofPolyline`.  But here, we are also using [`getNormalAtIndex`](http://www.openframeworks.cc/documentation/graphics/ofPolyline.html#show_getNormalAtIndex "getNormalAtIndex Documentation Page"] which you have already guess, takes an index and returns to you an `ofVec3f` that represents the normal vector for the vertex at that index.  
+Like with the first time we drew circles, we getting the all of the vertices in our `ofPolyline`.  But here, we are also using [`getNormalAtIndex`](http://www.openframeworks.cc/documentation/graphics/ofPolyline.html#show_getNormalAtIndex "getNormalAtIndex Documentation Page"] which you have already guess, takes an index and returns to you an `ofVec3f` that represents the normal vector for the vertex at that index.  **[Note: explain how normal vector is relative to (0,0,0) and how to center it on the vertex]** 
+
+**[Note: has ofVec3f been properly introduced for this part to make sense?]**
 
 ![Polyline Normals](images/intrographics_polylinenormals.png "Drawing the normals at the vertices of a polyline")
 
+Well, you may have also guessed that `ofPolyline` lets us sample normals as well as points, using the function [`getNormalAtIndexInterpolated`](http://www.openframeworks.cc/documentation/graphics/ofPolyline.html#show_getNormalAtIndexInterpolated "getNormalAtIndexInterpolated Documentation Page").  So let's comment out the code we just wrote, and try sampling our normals evenly along the polyline:
+
+	float numPoints = polyline.size();
+	float normalLength = 20;
+	for (int p=0; p<100; p+=10) {
+		ofVec3f point = polyline.getPointAtPercent(p/100.0);
+		float floatIndex = p/100.0 * (numPoints-1);
+		ofVec3f normal = polyline.getNormalAtIndexInterpolated(floatIndex) * normalLength;
+		ofLine(point-normal/2, point+normal/2);
+	}
+	
+We can get our evenly spaced point by using percents again, but `getNormalAtIndexInterpolated` is asking for an index.  Specifically, it is asking for a `floatIndex` which means that we can pass in 1.5 and the polyline will return a normal that lives halfway between the point at index 1 and halfway between the point at index 2.  So we need to convert our percent, `p/100.0`, to a `floatindex`.  All we need to do is multiple the percent by the last index in our polyline (which we can get from subtracting one from the [`size`](http://www.openframeworks.cc/documentation/graphics/ofPolyline.html#show_size "size Documentation Page") which tells us how many vertices are in our polyline).
+	
 ![Polyline Sampled Normals](images/intrographics_polylinesamplednormals.png "Drawing normals at sampled points along a polyline")
+
+What if you pumped up the number of normals you are drawing?  Change your loop increment from `p+=10` to `p+=1`, change your loop condition from `p<100` to `p<500` and change your `p/100.0` lines of code to `p/500.0`.  You might also want to use a transparent white for drawing these normals, so add `ofSetColor(255,100);` right before your loop.  And you will end up being able to draw ribbon-like lines:
 
 ![Polyline Many Many Sampled Normals](images/intrographics_polylinemanysamplednormals.png "Drawing many many normals to fill out the polyline")
 
+**[Note: this should probably be done by sampling by length rather than percent, but I don't know if it is worth explaining that]**
 
 
-**[Note: has ofVec3f been properly introduced for this part to make sense?]**
+
 
 **openFrameworks Bug and Weirdness:**
 Setting alpha to 1 causes the hue information on a color to shift when drawing overlapping shapes (need to verify this happens outside of the brush app)
