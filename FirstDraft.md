@@ -822,23 +822,64 @@ I'm sure you can guess what's next... drawing a whole bunch of tangents at evenl
 
 That was worth the aside, right?  (I'm sorry.  Desperately trying to avoid a tangent pun.)  Back to the normals we were working with, eh?   
 
-It doesn't seem terribly efficient to add thickness to our lines by drawing lots and lots of normals using `ofLine`.
+It doesn't seem terribly efficient to add thickness to our lines by drawing lots and lots of normals using `ofLine`.  Instead, we can draw a filled polygon to cover the space that our normal lines are covering.  **[note: explain the winding order here]** So, we want to loop through all of our upper normal bounds from left to right, then loop around and follow the lower normal bounds from right to left.  In order to do this, we are going to store our points and normals into vectors [**note: make sure vectors are explained**].  Again, comment out the last code and add in the following:
 
-Comment out your draw poly line
+	float numPoints = polyline.size();
+	float normalLength = 40;
+	vector <ofVec3f> points;
+	vector <ofVec3f> normals;
+	for (int p=0; p<100; p+=1) { 
+		ofVec3f point = polyline.getPointAtPercent(p/100.0);
+		float floatIndex = p/100.0 * (numPoints-1);
+		ofVec3f normal = polyline.getNormalAtIndexInterpolated(floatIndex) * normalLength;
+		points.push_back(point);
+		normals.push_back(normal);
+	}
+
+Nothing new here other than using vectors.  But it is important to note that we are using `p+=1` because we want to make sure that we are sampling our polyline at a high resolution.  We are now going to use three new functions: `ofBeginShape`, `ofVertex` and `ofEndShape`.  To indicate to openFrameworks that we want to build a polygon, we call [`ofBeginShape`](http://openframeworks.cc/documentation/graphics/ofGraphics.html#show_ofBeginShape ofBeginShape Documentation Page).  Then we can add vertices to the polygon by calling [`ofVertex`](http://openframeworks.cc/documentation/graphics/ofGraphics.html#show_ofVertex ofVertex Documentation Page).  And then finally, we finish our shape by calling [`ofEndShape`](http://openframeworks.cc/documentation/graphics/ofGraphics.html#show_ofEndShape ofEndShape Documentation Page).  Note that you *must* add your vertices in between `ofBeginShape` and `ofEndShape`.  So to loop through our normals and create the polygon, add:
+
+	ofSetColor(255, 200);
+	float numPoints = polyline.size();
+	float normalLength = 40;
+	ofSetLineWidth(0);
+	ofBeginShape();
+	for (int p=0; p<100; p+=1) {
+		ofVec3f point = polyline.getPointAtPercent(p/100.0);
+		float floatIndex = p/100.0 * (numPoints-1);
+		ofVec3f normal = polyline.getNormalAtIndexInterpolated(floatIndex) * normalLength;
+		ofVertex(point.x+normal.x/2.0, point.y+normal.y/2.0);
+	}
+	for (int p=90; p>=0; p-=1) {
+		ofVec3f point = polyline.getPointAtPercent(p/100.0);
+		float floatIndex = p/100.0 * (numPoints-1);
+		ofVec3f normal = polyline.getNormalAtIndexInterpolated(floatIndex) * normalLength;
+		ofVertex(point.x-normal.x/2.0, point.y-normal.y/2.0);
+	}
+	ofEndShape();
+	
+**[Note: explain above code, also maybe mention closing a shape with ofEndShape]**
+
+**[Note: how do you stop drawing the outline of the polygon without setting `ofSetLineWidth(0);`]**
+
+Before running, I would recommend commenting out your `polyline.draw();` line of code (if you haven't already).  Then you can have at it:
+
+![Polyline Polygon Normals](images/intrographics_normalspolygon.png "Drawing a polygon from the normals along the polyline")
+
+**[Note: ugh, better graphic please]**
+
+**[Note: insert last brush section on using math to control and animate the width of the brush]** 
+
+![Polyline Brush Width Test](images/intrographics_brushwidthtest.png "Test Graphic")
+
+**[Note: another test graphic, redo later using polygons and make animated]**
+
+
 
 **openFrameworks Bug and Weirdness:**
 - Setting alpha to 1 causes the hue information on a color to shift when drawing overlapping shapes (need to verify this happens outside of the brush app)
 - `polyline.getPointAtPercent(0)` and `polyline.getPointAtPercent(1.0)` return the same thing
 
-
-
-
-**[Note: might be a small thing, but I'm considering going back and rewritting all for loops to use i++ over ++i. i++ is more readable for a beginner]**
-
-Additional extensions to write up:
-- Drawing normal lines
-- Drawing tangents lines
-- Drawing normal shape
-- Something fun to cap off all of the concepts
+**General notes:**
+- might be a small thing, but I'm considering going back and rewritting all for loops to use i++ over ++i. i++ is more readable for a beginner
 
 
