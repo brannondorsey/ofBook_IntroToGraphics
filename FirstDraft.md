@@ -753,23 +753,34 @@ Why do we care about normals?  Well, imagine you were have a straight, horizonta
 
 You can comment out (or delete) your lines of code that draw circles in your `draw` function, and below that, add these lines of code: 
 
-	float numPoints = polyline.size();
-	for (int p=0; p<100; p+=10) {
-		ofVec3f point = polyline.getPointAtPercent(p/100.0);
-		float floatIndex = p/100.0 * (numPoints-1);
-		float normalLength = 50;
-		ofVec3f normal = polyline.getNormalAtIndexInterpolated(floatIndex) * normalLength;
-		ofSetLineWidth(1);
-		ofLine(point, point+normal);
-	}
-	
+        vector<ofVec3f> vertices = polyline.getVertices();
+        float normalLength = 40;
+        for (int vertexIndex=0; vertexIndex<vertices.size(); ++vertexIndex) {
+            ofVec3f vertex = vertices[vertexIndex];
+            ofVec3f normal = polyline.getNormalAtIndex(vertexIndex) * normalLength;
+            ofLine(vertex-normal/2, vertex+normal/2);
+        }
+        
+Like with the first time we drew circles, we getting the all of the vertices in our `ofPolyline`.  But here, we are also using [`getNormalAtIndex`](http://www.openframeworks.cc/documentation/graphics/ofPolyline.html#show_getNormalAtIndex "getNormalAtIndex Documentation Page"] which you have already guess, takes an index and returns to you an `ofVec3f` that represents the normal vector for the vertex at that index.  
 
+![Polyline Normals](images/intrographics_polylinenormals.png "Drawing the normals at the vertices of a polyline")
+
+![Polyline Sampled Normals](images/intrographics_polylinesamplednormals.png "Drawing normals at sampled points along a polyline")
+
+![Polyline Many Many Sampled Normals](images/intrographics_polylinemanysamplednormals.png "Drawing many many normals to fill out the polyline")
+
+
+
+**[Note: has ofVec3f been properly introduced for this part to make sense?]**
 
 **openFrameworks Bug and Weirdness:**
 Setting alpha to 1 causes the hue information on a color to shift when drawing overlapping shapes (need to verify this happens outside of the brush app)
 `polyline.getPointAtPercent(0)` and `polyline.getPointAtPercent(1.0)` return the same thing
 
 
+
+
+**[Note: might be a small thing, but I'm considering going back and rewritting all for loops to use i++ over ++i. i++ is more readable for a beginner]**
 
 Additional extensions to write up:
 - Drawing normal lines
