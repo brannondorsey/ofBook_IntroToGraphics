@@ -873,9 +873,11 @@ Before running, I would recommend commenting out your `polyline.draw();` line of
 
 **[Note: another test graphic, redo later using polygons and make animated]**
 
+## 2. See outline ##
 
+## 3. See outline ##
 
-**openFrameworks Bug and Weirdness:**
+**openFrameworks Bugs and Weirdness:**
 - Setting alpha to 1 causes the hue information on a color to shift when drawing overlapping shapes (need to verify this happens outside of the brush app)
 - `polyline.getPointAtPercent(0)` and `polyline.getPointAtPercent(1.0)` return the same thing
 
