@@ -782,18 +782,50 @@ We can get our evenly spaced point by using percents again, but `getNormalAtInde
 	
 ![Polyline Sampled Normals](images/intrographics_polylinesamplednormals.png "Drawing normals at sampled points along a polyline")
 
-What if you pumped up the number of normals you are drawing?  Change your loop increment from `p+=10` to `p+=1`, change your loop condition from `p<100` to `p<500` and change your `p/100.0` lines of code to `p/500.0`.  You might also want to use a transparent white for drawing these normals, so add `ofSetColor(255,100);` right before your loop.  And you will end up being able to draw ribbon-like lines:
+What if you pumped up the number of normals you are drawing?  Change your loop increment from `p+=10` to `p+=1`, change your loop condition from `p<100` to `p<500` and change your `p/100.0` lines of code to `p/500.0`.  You might also want to use a transparent white for drawing these normals, so add `ofSetColor(255,100);` right before your loop.  And you will end up being able to draw ribbon lines:
 
 ![Polyline Many Many Sampled Normals](images/intrographics_polylinemanysamplednormals.png "Drawing many many normals to fill out the polyline")
 
 **[Note: this should probably be done by sampling by length rather than percent, but I don't know if it is worth explaining that]**
 
+You've just added some thickness to your polylines - and we'll go into a way to do that in a more proper way - but let's have a quick aside and talk about tangents.  These wonderful things are perpendicular to the normals that we just drew.  So if you drew tangents along a perfectly straight line, you wouldn't really see anything.  The fun part comes when you draw tangents on a curved line, so let's see what that looks like.  Same drill as before, comment out the last code and add in the following:
 
+	vector<ofVec3f> vertices = polyline.getVertices();
+	float tangentLength = 80;
+	for (int vertexIndex=0; vertexIndex<vertices.size(); ++vertexIndex) {
+		ofVec3f vertex = vertices[vertexIndex];
+		ofVec3f tangent = polyline.getTangentAtIndex(vertexIndex) * tangentLength;
+		ofLine(vertex-tangent/2, vertex+tangent/2);
+	}
+	
+This should look very familiar except for [`getTangentAtIndex`](http://www.openframeworks.cc/documentation/graphics/ofPolyline.html#show_getTangentAtIndex "getTangentAtIndex Documenation Page") which is just the equivalent of `getNormalAtIndex` but for tangents.  For straight and slightly curved lines, not much happens, but sharply curved lines reveal the tangents:
+        
+**[Note: again diagram would explain the concept]**
+
+![Polyline Tangents](images/intrographics_tangents.png "Drawing tangents at vertices of polyline")
+
+I'm sure you can guess what's next... drawing a whole bunch of tangents at evenly spaced locations!  It's more fun that in sounds.  Same drill, comment out the last code, and add the following:
+
+	ofSetColor(255, 50);
+	float numPoints = polyline.size();
+	float tangentLength = 300;
+	for (int p=0; p<500; p+=1) {
+		ofVec3f point = polyline.getPointAtPercent(p/500.0);
+		float floatIndex = p/500.0 * (numPoints-1);
+		ofVec3f tangent = polyline.getTangentAtIndexInterpolated(floatIndex) * tangentLength;
+		ofLine(point-tangent/2, point+tangent/2);
+	}
+
+[`getTangentAtIndexInterpolated`](http://www.openframeworks.cc/documentation/graphics/ofPolyline.html#show_getTangentAtIndexInterpolated "getTangentAtIndexInterpolated Documentation Page") works like `getNormalAtIndexInterpolated`.  And you get something like this:
+
+![Polyline Exaggerated Tangents](images/intrographics_exaggeratedtangents.png "Drawing exaggerated tangents at at evenly spaced points along the polyline")
+
+That was worth the aside, right?  (I'm sorry.  Desperately trying to avoid a tangent pun.)  Back to the normals we were working with, eh?   
 
 
 **openFrameworks Bug and Weirdness:**
-Setting alpha to 1 causes the hue information on a color to shift when drawing overlapping shapes (need to verify this happens outside of the brush app)
-`polyline.getPointAtPercent(0)` and `polyline.getPointAtPercent(1.0)` return the same thing
+- Setting alpha to 1 causes the hue information on a color to shift when drawing overlapping shapes (need to verify this happens outside of the brush app)
+- `polyline.getPointAtPercent(0)` and `polyline.getPointAtPercent(1.0)` return the same thing
 
 
 
