@@ -886,6 +886,10 @@ For a physical analogy, imagine that you have a piece of graphing paper in front
 
 **[Note: explain why ofBackground can't be used with transparency]**
 
+Repeating a shape with translate
+Drawing a rotated rectangle
+
+
 
 ofSetFrameRate(60);
 ofEnableAlphaBlending();
