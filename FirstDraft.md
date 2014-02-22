@@ -981,9 +981,39 @@ And onto `ofScale` and `ofRotate`!  Go ahead and create a new project where you'
 
 ![Spiraling Rectangles](images/intrographics_spiralingrectangles.png "Drawing a series of spiraling rectangles")
 
-Before knowing that an `ofRotate` command existed.  How would you have gone about drawing a rotated rectangle?  `ofRect` would be no help.  You might try calculating the vertices and create a polygon using `ofBeginShape` and `ofEndShape`.  You could do that, but it feels tedious, right?  `ofRotate`
+Before knowing that an `ofRotate` command existed.  How would you have gone about drawing a rotated rectangle?  `ofRect` would be no help.  You might try calculating the vertices and create a polygon using `ofBeginShape` and `ofEndShape`.  You could do that, but it feels tedious, right?  [`ofRotate`](http://www.openframeworks.cc/documentation/graphics/ofGraphics.html#show_ofRotate "ofRotate Documentation Page") is here to make that easier.  `ofRotate` takes an angle in degrees and will rotate our coordinate system around the current origin (0, 0).  (There is another way to use `ofRotate` to control rotation around the x, y and z axes, but we won't be using it.) 
+
+Let's set up some code in our `draw` function:
+
+	ofBackground(255);
+	ofSetColor(0, 0, 255);
+	ofRect(500, 200, 200, 200);
+
+Rectangle, no sweat.  Rotated rectangle...uh, well, let's try `ofRotate`:
+
+	ofBackground(255);
+	ofPushMatrix();
+		// Original rectangle in blue
+		ofSetColor(0, 0, 255);
+		ofRect(500, 200, 200, 200);
+		
+		// Rotated rectangle in red
+		ofRotate(45);
+		ofSetColor(0, 0, 255);
+		ofRect(500, 200, 200, 200);
+	ofPopMatrix();
+
+Hmm:
 
 
+![Spiraling Rectangles](images/intrographics_rotatewrong.png "Drawing a series of spiraling rectangles")
+
+![Spiraling Rectangles](images/intrographics_rotateright.png "Drawing a series of spiraling rectangles")
+
+![Spiraling Rectangles](images/intrographics_rotaterightcentered.png "Drawing a series of spiraling rectangles")
+
+
+	
 
 
 ## 3. See outline ##
