@@ -910,7 +910,7 @@ So let's tackle [`ofTranslate`](http://www.openframeworks.cc/documentation/graph
 
 And you end up with something like this:
 
-![Monochromatic Family](images/intrographics_coordinatesystemfamily.png "A little monochromatic stick figure family")
+![Monochromatic Family](images/intrographics_coordsystemfamily.png "A little monochromatic stick figure family")
 
 What if, after figuring out the coordinates for all your shapes, you decided that you wanted to draw that family at a different spot on the screen, or you decided that you wanted to clone the family and draw a row of them?  You *could* change all the positions of the shapes you are drawing, or you could just use `ofTranslate` to move your coordinate system and leave the positions as they are:
 
@@ -941,11 +941,11 @@ What if, after figuring out the coordinates for all your shapes, you decided tha
 
 So we have just taken our original cricle and rectangle code and wrapped it in a loop which ends with `ofTranslate(150, 0)` which shifts our graph paper (coordinate system) to the left 150 pixels each time it executes.  And you'll end up with something like this:
 
-![Family Row](images/intrographics_coordinatesystemfamilyrow.png "A row of stick figure families")
+![Family Row](images/intrographics_coordsystemfamilyrow.png "A row of stick figure families")
 
 Or almost like that.  I added a tweak to randomize the colors of the people - every family is different, right?  If you wanted to create a whole grid of families, you will run into problems.  After the first row of families, your coordinate system will have been moved quite far to the left.  If you move your coordinate system up in order to start drawing your second row, you will end up drawing off the screen.  It would look something like this:
 
-![Family Improper Grid](images/intrographics_coordinatesystemfamilywithoutsaving.png "Drawing the families without reseting the coordinate system")
+![Family Improper Grid](images/intrographics_coordsystemfamilywithoutsaving.png "Drawing the families without reseting the coordinate system")
 
 So what we need is some way to reset the coordinate system.  You'll want to start using [`ofPushMatrix`](http://www.openframeworks.cc/documentation/graphics/ofGraphics.html#show_ofPushMatrix "ofPushMatrix Documentation Page") and [`ofPopMatrix`](http://www.openframeworks.cc/documentation/graphics/ofGraphics.html#show_ofPopMatrix "ofPopMatrix Documentation Page").
 
@@ -967,11 +967,11 @@ So we can use these new functions like this:
 
 And you should end up with a grid.  I've skipped ahead and used `ofScale`, but you should end up with a nice grid like this:
 
-![Family Proper Grid](images/intrographics_coordinatesystemfamilywithsaving.png "Drawing the families with proper reseting of the coordinate system")
+![Family Proper Grid](images/intrographics_coordsystemfamilywithsaving.png "Drawing the families with proper reseting of the coordinate system")
 
 Or if you hate grids, you can make a mess of a crowd:
 
-![Family Crowd](images/intrographics_coordinatesystemfamilycrowd.png "Drawing a crowd of families")
+![Family Crowd](images/intrographics_coordsystemfamilycrowd.png "Drawing a crowd of families")
 
 
 
