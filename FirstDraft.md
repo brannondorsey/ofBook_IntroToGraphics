@@ -1139,7 +1139,29 @@ We haven't talked about this function yet, but [`mouseMoved(int x, int y )`](htt
 
 **[note: ofMap, ofGetWidth and ofGetHeight have probably been explained earlier in the tutorial?]**
 
+One last extension, just for fun.  We are drawing black rectangles on a white background.  We could easily draw white rectangles on a black background.  We could also slowly flip between those two.  Add this code at the top of the `draw` function:
 
+	ofColor darkColor(0,0,0,255);
+	ofColor lightColor(255,255,255,255);
+	float time = ofGetElapsedTimef();
+	float percent = ofMap(cos(time/2.0), -1, 1, 0, 1, true);
+	ofColor bgColor = darkColor;
+	bgColor.lerp(lightColor, percent);
+	bgColor.a = clearAlpha;
+	ofColor fgColor = lightColor;
+	fgColor.lerp(darkColor, percent);
+
+Then use `bgColor` when you call `ofSetColor` before drawing the transparent rectangle, and use `fgColor` when you call `ofSetColor` for your rectangle outlines.
+
+![Animated Contrast Reversing Spiral](images/intrographics_animatedspiralcontrastreverse.png "Spiral animated with a trail effect where the contrast reverses over time")
+
+**[note: this code could use some explanation]**
+
+**[note: there should be a gif in here showing the animation]**
+
+Congrats, you survived coordinate transformations :)
+
+	
 
 
 
