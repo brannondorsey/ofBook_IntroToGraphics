@@ -973,7 +973,7 @@ Or if you hate grids, you can make a mess of a crowd:
 
 ![Family Crowd](images/intrographics_coordsystemfamilycrowd.png "Drawing a crowd of families")
 
-
+**[note: better purple-ish could be used here]**
 
 
 
