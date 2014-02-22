@@ -1061,9 +1061,39 @@ You can now push, pop, rotate and translate like a pro, so the only thing left t
 
 ![Scaled Centered Rectangle](images/intrographics_scalecentered.png "Drawing a scaled and centered rectangle")
 
+We'll run into the same issues that we ran into with centering.  The solution is the same - translate before scaling if you want centered rectangles.
 
+If you want to create some trippy rectangles, start a new project (or just delete the red and blue rectangle code you wrote).  The core of the idea is really simple, we are going to draw a rectangle at the center of the screen, scale, rotate, draw a rectangle, repeat and repeat.  So we'll code the core and then we'll add some motion and graphical florishes.  Add the following to your `draw` function:
 
+	ofBackground(255);
 	
+	ofSetRectMode(OF_RECTMODE_CENTER);
+	ofSetColor(0);
+	ofNoFill();
+	ofPushMatrix();
+		ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
+		for (int i=0; i<100; ++i) {
+			ofScale(1.1, 1.1);
+			ofRotate(5);
+			ofRect(0, 0, 50, 50);
+		}
+	ofPopMatrix();
+
+**[Note: has ofGetWidth and ofGetHeight been explained at this point?]**
+
+And that's it:
+
+![Simple Spiral](images/intrographics_simplespiral.png "Simple spiral of rectangles")
+
+You can play with the scaling, rotation, size of the rectangle, etc.  Three lines of code will add some life to our rectangles and cause them to coil and uncoil over time.  Put these in the place of `ofRotate(5);`:
+
+	float time = ofGetElapsedTimef();
+	float noise = ofSignedNoise(time) * 20.0;
+	ofRotate(noise);
+
+
+
+
 
 
 ## 3. See outline ##
