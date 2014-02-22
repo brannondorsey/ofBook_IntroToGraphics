@@ -970,6 +970,11 @@ And you should end up with a grid.  I've skipped ahead and used `ofScale`, but y
 
 ![Family Proper Grid](images/intrographics_coordinatesystemfamilywithsaving.png "Drawing the families with proper reseting of the coordinate system")
 
+Or if you hate grids, you can make a crowd:
+
+![Family Crowd](images/intrographics_coordinatesystemfamilycrowd.png "Drawing a crowd of families")
+
+
 
 **[Note: explain of push/pop sooner than this]**
 
