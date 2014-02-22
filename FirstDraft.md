@@ -1005,7 +1005,7 @@ Rectangle, no sweat.  Rotated rectangle...uh, well, let's try `ofRotate`:
 
 Hmm, not quite right:
 
-![Spiraling Rectangles](images/intrographics_rotatewrong.png "Drawing a series of spiraling rectangles")
+![Improper Rotated Rectangle](images/intrographics_rotatewrong.png "Uh oh, rotated rectangle moved")
 
 Well, `ofRotate` rotates the coordinate system around the current origin (0,0) of the coordinate system.  That origin starts out in the top left corner of the screen by default, so our rectangle rotated 45 degrees clockwise around the upper left pixel in our image.  If we want to rotate our rectangle in place, we need to use `ofTranslate` to move the origin to our rectangle *before* rotating.  Then our rectangle will rotate in place.  So update the red rectangle's code:
 	// Rotated rectangle in red
@@ -1016,7 +1016,7 @@ Well, `ofRotate` rotates the coordinate system around the current origin (0,0) o
 
 And we get a rectangle that rotates around its upper left corner:
 
-![Spiraling Rectangles](images/intrographics_rotateright.png "Drawing a series of spiraling rectangles")
+![Rotated Rectangle](images/intrographics_rotateright.png "Drawing a rotated red rectangle")
 
 Remember that by default, when you pass an (x,y) position to `ofRect`, it will assume that (x,y) is the position of the upper left corner.  If you want to rotate the rectangle around its center, you can use `ofSetRectMode(OF_RECTMODE_CENTER);` to tell openFrameworks that the (x,y) position defines the center of the rectangle.  The alternative to leave the rectangle mode as set as the upper left corner and modify your code like this:
 
@@ -1036,9 +1036,31 @@ Remember that by default, when you pass an (x,y) position to `ofRect`, it will a
 	// red rectangle at (0,0).  To do that, we need to draw at (-width/2, -height/2):
 	ofRect(-100, -100, 200, 200);
 	
-**[Note: maybe omit this code?  the explanation of the (-100, -100) needs diagrams with graph paper]**
+**[Note: maybe omit this code?  the explanation of the (-100, -100) needs diagrams with graph paper for a better understanding]**
 
-![Spiraling Rectangles](images/intrographics_rotaterightcentered.png "Drawing a series of spiraling rectangles")
+![Rotated Centered Rectangle](images/intrographics_rotaterightcentered.png "Drawing a rotated and centered red rectangle")
+
+You can now push, pop, rotate and translate like a pro, so the only thing left to do is figure out how to use [`ofScale`](http://www.openframeworks.cc/documentation/graphics/ofGraphics.html#show_ofScale "ofScale Documentation Page") and then we can create some infinitely spiraling rectangles.
+
+`ofScale` takes three arguments, the desired scaling in x, y and z directions.  The z parameter is option and defaults to 1.  Since we are working in two dimensions (x and y), we should just leave the z scale as 1.0.  Our scaling code applied to the blue and red rectangles looks like:
+
+	ofSetRectMode(OF_RECTMODE_CENTER);
+	ofBackground(255);
+	
+	ofPushMatrix();
+		// Original rectangle in blue
+		ofSetColor(0, 0, 255);
+		ofRect(500, 200, 200, 200);
+		
+		// Scaled down rectangle in red
+		ofTranslate(500, 200);
+		ofScale(0.5, 0.5);
+		ofSetColor(255, 0, 0);
+		ofRect(0, 0, 200, 200);
+	ofPopMatrix();
+
+![Scaled Centered Rectangle](images/intrographics_scalecentered.png "Drawing a scaled and centered rectangle")
+
 
 
 	
