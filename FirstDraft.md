@@ -1088,12 +1088,33 @@ And that's it:
 You can play with the scaling, rotation, size of the rectangle, etc.  Three lines of code will add some life to our rectangles and cause them to coil and uncoil over time.  Put these in the place of `ofRotate(5);`:
 
 	float time = ofGetElapsedTimef();
-	float noise = ofSignedNoise(time) * 20.0;
+	float noise = ofSignedNoise(time/2.0) * 20.0;
 	ofRotate(noise);
 
+**[Note: noise is a loaded concept.  I'm not sure who is covering it, but I can add a section here explaining it.]**
 
+Next up is to make our spiral leave a visual smear as it rotates.  We turned off the background automatic clearing (`ofSetBackgroundAuto(false)`) in section 1 with our brushes.  What if we extended that concept and used it here?  We want to draw new frames of our animation on top of faded versions of the past frames of our animation to create a smear (which is usually called a "trail effect").  For our app, this is a lot easier than it sounds to implement.  We will turn off the background automatic clearing, and then every time we are about to draw a frame of the animation, we will draw a transparent screen over our window.  This will cause the frames of our animation to fade out over time.
 
+So first step is to add a few things to `setup`:
 
+	ofSetBackgroundAuto(false);
+	ofEnableAlphaBlending(); // Remember if we are using transparency, we need to let openFrameworks know
+	ofBackground(255);
+
+Delete `ofBackground(255);` from your `draw` function and what do you get?
+
+![Animated Spiral Without Clearing](images/intrographics_animatedspiralwithoutclearing.png "Simple spiral animated without clearing the background")
+
+Messy, huh?  Add this to the beginning of your `draw` function:
+
+	ofSetColor(255, 100);
+	ofSetRectMode(OF_RECTMODE_CORNER);
+	ofFill();
+	ofRect(0, 0, ofGetWidth(), ofGetHeight());
+	
+By drawing a transparent rectangle over the whole window, we can clean up some of that mess while still leaving a smear or trail.  If you turn up the alpha, you will turn down the smear.  If you turn down the alpha, you will turn up the smear.  **[note: explain why you can't use ofBackground here]**
+
+![Animated Spiral With Clearing](images/intrographics_animatedspiralwithclearing.png "Simple spiral animated with a trail effect")
 
 
 ## 3. See outline ##
