@@ -952,7 +952,7 @@ So what we need is some way to reset the coordinate system.  You'll want to star
 `ofPushMatrix` saves the current coordinate system and `ofPopMatrix` returns you to the last saved coordinate system.  The reason why they have these functions have the word matrix in them is because of what is happening behind the scenes in openFrameworks.  You start with an un- rotated, un-translated, and un-scaled coordinate system that you used in section 1 of this chapter, which we will call the unmodified coordinate system.  When you start using `ofTranslate`, `ofRotate` and `ofScale`, the rotation, translation and scaling are all stored in a single transformation matrix, which represents the modified coordinate system.  Let's say you have a point (x, y, z) in the unmodifed coordinate system, if you multiple it by the transformation matrix, you end up with a new point (x', y', z') that is in modified coordinate system.  The math chapter *[note: point to math chapter]** will go into more depth on this.  I just want to make sure that the word matrix in `ofPushMatrix` and `ofPopMatrix` has some context.  If you want, you can just think of it as ofSaveCoordinateSystem and ofReturnToLastSavedCoordinateSystem.
 
 So we can use these new functions like this:
-
+	
         for (int rows=0; rows<10; rows++) {
             ofPushMatrix(); // Save the coordinate system before you shift it horizontally
             for (int cols=0; cols<10; cols++) {
@@ -965,15 +965,23 @@ So we can use these new functions like this:
             ofTranslate(0, 200);
         }
 
+**[note: wrap whole thing in push/pop for good practice? also indent code between push/pop for readability]**
+
 And you should end up with a grid.  I've skipped ahead and used `ofScale`, but you should end up with a nice grid like this:
 
 ![Family Proper Grid](images/intrographics_coordsystemfamilywithsaving.png "Drawing the families with proper reseting of the coordinate system")
 
-Or if you hate grids, you can make a mess of a crowd:
+Or if you hate grids, you can make a mess of a crowd using random translations:
 
 ![Family Crowd](images/intrographics_coordsystemfamilycrowd.png "Drawing a crowd of families")
 
 **[note: better purple-ish could be used here]**
+
+And onto `ofScale` and `ofRotate`!  Go ahead and create a new project where you'll be creating some rotating and scaling rectangles that will end up looking like the below image.  Guess what?  At the heart of the code, there will be single `ofRect` that is called inside a loop with a bunch of scaling and rotations.
+
+![Spiraling Rectangles](images/intrographics_spiralingrectangles.png "Drawing a series of spiraling rectangles")
+
+Before knowing that an `ofRotate` command existed.  How would you have gone about drawing a rotated rectangle?  `ofRect` would be no help.  You might try calculating the vertices and create a polygon using `ofBeginShape` and `ofEndShape`.  You could do that, but it feels tedious, right?  `ofRotate`
 
 
 
