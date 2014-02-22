@@ -1132,12 +1132,13 @@ Initialize them in the `setup` function of your source file (.cpp):
 	clearAlpha = 100;
 	timeScale = 0.5;
 
-We haven't talked about this function yet, but [`mouseMoved(int x, int y )`](http://openframeworks.cc/documentation/application/ofBaseApp.html#!show_mouseMoved "mouseMoved Documentation Page") will get run anytime the mouse position changes in our openFrameworks window.  We can use it to update our parameters:
+We haven't talked about this function yet, but [`mouseMoved(int x, int y )`](http://openframeworks.cc/documentation/application/ofBaseApp.html#!show_mouseMoved "mouseMoved Documentation Page") will get run anytime the mouse position changes in our openFrameworks window.  We can use it to change our parameters through a mapping of the x and y mouse positions:
 
 	clearAlpha = ofMap(x, 0, ofGetWidth(), 0, 255);
 	timeScale = ofMap(y, 0, ofGetHeight(), 0, 1);
 
 **[note: ofMap, ofGetWidth and ofGetHeight have probably been explained earlier in the tutorial?]**
+
 
 
 
