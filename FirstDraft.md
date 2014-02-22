@@ -886,8 +886,7 @@ For a physical analogy, imagine that you have a piece of graphing paper in front
 
 **[Note: explain why ofBackground can't be used with transparency]**
 
-So let's tackle [`ofTranslate`](http://www.openframeworks.cc/documentation/graphics/ofGraphics.html#show_ofTranslate "ofTranslate Documentation Page") first.  `ofTranslate` takes an x, a y and an optional z parameter, and then shifts the coordinate system by those specified values.  Why would you ever want to shift the coordinate system like this?  Imagine that you wrote some code to draw a little stick figure family:
-
+So let's tackle [`ofTranslate`](http://www.openframeworks.cc/documentation/graphics/ofGraphics.html#show_ofTranslate "ofTranslate Documentation Page") first.  `ofTranslate` takes an x, a y and an optional z parameter, and then shifts the coordinate system by those specified values.  Why would you ever want to shift the coordinate system like this?  Imagine that you wrote some code to draw a little stick figure family.  Or better yet, create a new project and add this to your `draw` function of your source file (.cpp):
 
 	ofBackground(255);
 	
@@ -970,13 +969,10 @@ And you should end up with a grid.  I've skipped ahead and used `ofScale`, but y
 
 ![Family Proper Grid](images/intrographics_coordinatesystemfamilywithsaving.png "Drawing the families with proper reseting of the coordinate system")
 
-Or if you hate grids, you can make a crowd:
+Or if you hate grids, you can make a mess of a crowd:
 
 ![Family Crowd](images/intrographics_coordinatesystemfamilycrowd.png "Drawing a crowd of families")
 
-
-
-**[Note: explain of push/pop sooner than this]**
 
 
 
