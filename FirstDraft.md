@@ -1003,12 +1003,40 @@ Rectangle, no sweat.  Rotated rectangle...uh, well, let's try `ofRotate`:
 		ofRect(500, 200, 200, 200);
 	ofPopMatrix();
 
-Hmm:
-
+Hmm, not quite right:
 
 ![Spiraling Rectangles](images/intrographics_rotatewrong.png "Drawing a series of spiraling rectangles")
 
+Well, `ofRotate` rotates the coordinate system around the current origin (0,0) of the coordinate system.  That origin starts out in the top left corner of the screen by default, so our rectangle rotated 45 degrees clockwise around the upper left pixel in our image.  If we want to rotate our rectangle in place, we need to use `ofTranslate` to move the origin to our rectangle *before* rotating.  Then our rectangle will rotate in place.  So update the red rectangle's code:
+	// Rotated rectangle in red
+	ofTranslate(500, 200);
+	ofRotate(45);
+	ofSetColor(0, 0, 255);
+	ofRect(0, 0, 200, 200);
+
+And we get a rectangle that rotates around its upper left corner:
+
 ![Spiraling Rectangles](images/intrographics_rotateright.png "Drawing a series of spiraling rectangles")
+
+Remember that by default, when you pass an (x,y) position to `ofRect`, it will assume that (x,y) is the position of the upper left corner.  If you want to rotate the rectangle around its center, you can use `ofSetRectMode(OF_RECTMODE_CENTER);` to tell openFrameworks that the (x,y) position defines the center of the rectangle.  The alternative to leave the rectangle mode as set as the upper left corner and modify your code like this:
+
+	// Rotated rectangle in red
+	
+	// Add half rect width and half rect height to the translate, 
+	// so that (0,0) is now at the center of the blue rectangle
+	ofTranslate(500+100, 200+100); 
+	
+	// Rotate around the center of the blue rectangle
+	ofRotate(45);
+	ofSetColor(255, 0, 0);
+	
+	// Now we want to draw our red rectangle by specifying the upper left corner
+	// If we tried ofRect(0,0,200,200), we would draw the red's corner in the center of blue
+	// Since (0,0) is currently the cetner of the blue rect, we want to draw the center of our 
+	// red rectangle at (0,0).  To do that, we need to draw at (-width/2, -height/2):
+	ofRect(-100, -100, 200, 200);
+	
+**[Note: maybe omit this code?  the explanation of the (-100, -100) needs diagrams with graph paper]**
 
 ![Spiraling Rectangles](images/intrographics_rotaterightcentered.png "Drawing a series of spiraling rectangles")
 
