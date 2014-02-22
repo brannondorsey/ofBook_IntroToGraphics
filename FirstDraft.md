@@ -1088,7 +1088,8 @@ And that's it:
 You can play with the scaling, rotation, size of the rectangle, etc.  Three lines of code will add some life to our rectangles and cause them to coil and uncoil over time.  Put these in the place of `ofRotate(5);`:
 
 	float time = ofGetElapsedTimef();
-	float noise = ofSignedNoise(time/2.0) * 20.0;
+	float timeScale = 0.5;
+	float noise = ofSignedNoise(time * timeScale) * 20.0;
 	ofRotate(noise);
 
 **[Note: noise is a loaded concept.  I'm not sure who is covering it, but I can add a section here explaining it.]**
@@ -1106,8 +1107,9 @@ Delete `ofBackground(255);` from your `draw` function and what do you get?
 ![Animated Spiral Without Clearing](images/intrographics_animatedspiralwithoutclearing.png "Simple spiral animated without clearing the background")
 
 Messy, huh?  Add this to the beginning of your `draw` function:
-
-	ofSetColor(255, 100);
+	
+	float clearAlpha = 100;
+	ofSetColor(255, clearAlpha);
 	ofSetRectMode(OF_RECTMODE_CORNER);
 	ofFill();
 	ofRect(0, 0, ofGetWidth(), ofGetHeight());
@@ -1115,6 +1117,29 @@ Messy, huh?  Add this to the beginning of your `draw` function:
 By drawing a transparent rectangle over the whole window, we can clean up some of that mess while still leaving a smear or trail.  If you turn up the alpha, you will turn down the smear.  If you turn down the alpha, you will turn up the smear.  **[note: explain why you can't use ofBackground here]**
 
 ![Animated Spiral With Clearing](images/intrographics_animatedspiralwithclearing.png "Simple spiral animated with a trail effect")
+
+Okay, you've got some code.  It does something neat.  But it has a bunch of variables that you are playing with by manually changing them and reruning your code.  It would be much nicer to take these parameters and change them at runtime, so that you can find the settings you like best.  It doesn't matter quite so much for this project, but in your own work, this process of parameterization and exploration will be very important (especially, if you are creating any generative visuals).
+
+We've got a couple parameters that drastically change the visual experience of our spirals.  Let's focus in on the `timeScale` of our noise and the `clearAlpha` used to set transparency.  We can use the mouse position to control both of these variables on the fly.  Horizontally moving the mouse can turn the `clearAlpha` up and down while moving the mouse vertically can turn the `timeScale` up and down.  (Using the mouse like this is handy if you've got one or two parameters to explore).
+
+Delete those lines of code that define `timeScale` and `clearAlpha`.  Instead add this to your header (.h) file:
+
+	float clearAlpha;
+	float timeScale;
+	
+Initialize them in the `setup` function of your source file (.cpp):
+
+	clearAlpha = 100;
+	timeScale = 0.5;
+
+We haven't talked about this function yet, but [`mouseMoved(int x, int y )`](http://openframeworks.cc/documentation/application/ofBaseApp.html#!show_mouseMoved "mouseMoved Documentation Page") will get run anytime the mouse position changes in our openFrameworks window.  We can use it to update our parameters:
+
+	clearAlpha = ofMap(x, 0, ofGetWidth(), 0, 255);
+	timeScale = ofMap(y, 0, ofGetHeight(), 0, 1);
+
+**[note: ofMap, ofGetWidth and ofGetHeight have probably been explained earlier in the tutorial?]**
+
+
 
 
 ## 3. See outline ##
